@@ -5,23 +5,23 @@ init(autoreset=True)
 
 BANNER = f"""
 {Style.BRIGHT}{Fore.CYAN}
-■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
-■ {Fore.WHITE}USER ENUMERATION DETECTOR {Fore.CYAN}■
-■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
+╔══════════════════════════════════════╗
+║ {Fore.WHITE}DETECTOR DE ENUMERACIÓN DE USUARIOS {Fore.CYAN}║
+╚══════════════════════════════════════╝
 """
 
 def print_status(message, status):
     status_colors = {
-        "info": Fore.CYAN,
+        "info": Fore.CYAN + Style.BRIGHT,
         "success": Fore.GREEN + Style.BRIGHT,
-        "warning": Fore.YELLOW,
-        "error": Fore.RED
+        "warning": Fore.YELLOW + Style.BRIGHT,
+        "error": Fore.RED + Style.BRIGHT
     }
     print(f"{status_colors[status]}[{status.upper()}] {Fore.WHITE}{message}")
 
 def check_user_enumeration(url):
     print(BANNER)
-    print_status(f"Iniciando análisis en: {url}", "info")
+    print_status(f"Analizando: {url}", "info")
     
     endpoints = {
         "REST API Users": "/wp-json/wp/v2/users",
