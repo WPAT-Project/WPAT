@@ -15,16 +15,23 @@ from scripts import (
 )
 
 init(autoreset=True)
-audit_interrupted = False
 
 def signal_handler(sig, frame):
-    global audit_interrupted
-    audit_interrupted = True
-    sys.stdout.write("\033[0;0H\033[J")
-    print(f"\n{Style.BRIGHT}{Fore.RED}❌ AUDITORÍA CANCELADA! {Fore.WHITE}Deteniendo procesos...{Style.RESET_ALL}")
-    sys.exit(1)
+    print(f"\n{Style.BRIGHT}{Fore.RED}❌ Auditoría interrumpida! {Fore.WHITE}Saliendo...")
+    sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)
+
+TOOLS = {
+    "1": {"name": "Detectar Enumeración de Usuarios", "func": check_user_enumeration},
+    "2": {"name": "Analizar XML-RPC", "func": check_xmlrpc},
+    "3": {"name": "Escáner de Archivos Sensibles", "func": scan_sensitive_files},
+    "4": {"name": "Detectar Versión de WordPress", "func": detect_wp_version},
+    "5": {"name": "Auditar REST API", "func": check_rest_api},
+    "6": {"name": "Escáner de Plugins", "func": scan_plugins},
+    "7": {"name": "Auditoría Completa", "func": None},
+    "8": {"name": "Salir", "func": None}
+}
 
 class DualOutput:
     def __init__(self, console, log_file):
@@ -34,8 +41,7 @@ class DualOutput:
 
     def write(self, text):
         self.console.write(text)
-        cleaned_text = self.ansi_escape.sub('', text)
-        self.log_file.write(cleaned_text)
+        self.log_file.write(self.ansi_escape.sub('', text))
 
     def flush(self):
         self.console.flush()
@@ -58,8 +64,7 @@ def print_banner():
 {Fore.CYAN}          Versión 1.1 · Ethical Hacking
 {Fore.YELLOW}         Creado por Santitub | {Fore.BLUE}https://github.com/Santitub
 {Fore.MAGENTA}─────────────────────────────────────────────
-{Style.RESET_ALL}
-"""
+{Style.RESET_ALL}"""
     print(banner)
 
 def get_target_url():
@@ -77,33 +82,7 @@ def print_menu(url):
         print(f"{Style.BRIGHT}{Fore.CYAN} [{Fore.MAGENTA}{key}{Fore.CYAN}] {Fore.WHITE}{TOOLS[key]['name']}")
     print(f"{Fore.MAGENTA}─────────────────────────────────────────────")
 
-def run_full_audit(url):
-    print(f"\n{Style.BRIGHT}{Fore.CYAN}► {Fore.WHITE}Ejecutando auditoría completa... {Fore.YELLOW}🛡️\n")
-    
-    # Solicitar parámetros solo para plugins
-    wordlist = input(f"\n{Fore.CYAN}↳ Wordlist para plugins {Fore.YELLOW}(ej: plugins.txt){Fore.WHITE}: ").strip()
-    threads = input(f"{Fore.CYAN}↳ Hilos para escaneo {Fore.YELLOW}(1-50){Fore.WHITE} [10]: ").strip() or "10"
-    threads = max(1, min(50, int(threads)))
-    
-    tools_order = ["1", "2", "3", "4", "5", "6"]
-    
-    for key in tools_order:
-        if audit_interrupted:
-            break
-            
-        print(f"\n{Fore.MAGENTA}────── {TOOLS[key]['name'].upper()} {Fore.MAGENTA}──────")
-        
-        # Pasar parámetros solo al escáner de plugins
-        if key == "6":
-            sys.stdout.write("\033[2J\033[H")  # Limpiar área de trabajo
-            TOOLS[key]['func'](url, is_full_audit=True, wordlist=wordlist, threads=threads)
-        else:
-            TOOLS[key]['func'](url)  # <-- Sin parámetros extra
-        
-        print(f"\n{Fore.MAGENTA}────────────────────────────────")
-
 def run_tool(url, choice):
-    global audit_interrupted
     log_dir = "logs"
     os.makedirs(log_dir, exist_ok=True)
     timestamp = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
@@ -113,23 +92,16 @@ def run_tool(url, choice):
         dual = DualOutput(sys.stdout, f)
         with redirect_stdout(dual):
             if choice == '7':
-                run_full_audit(url)
+                print(f"{Style.BRIGHT}{Fore.CYAN}► {Fore.WHITE}Ejecutando auditoría completa... {Fore.YELLOW}🛡️\n")
+                for key in [k for k in TOOLS if k not in ("6", "7", "8")]:
+                    print(f"{Fore.MAGENTA}────── {TOOLS[key]['name'].upper()} {Fore.MAGENTA}──────")
+                    TOOLS[key]['func'](url)
+                    print()
             else:
-                print(f"{Style.BRIGHT}{Fore.CYAN}► {Fore.WHITE}Ejecutando: {Fore.YELLOW}{TOOLS[choice]['name']}...\n")
-                TOOLS[choice]['func'](url)
+                if TOOLS[choice]['func']:
+                    TOOLS[choice]['func'](url)
 
-    print(f"\n{Style.BRIGHT}{Fore.GREEN}[✓]{Fore.WHITE} Log guardado en: {log_file}")
-
-TOOLS = {
-    "1": {"name": "Detectar Versión", "func": detect_wp_version},
-    "2": {"name": "Enumeración Usuarios", "func": check_user_enumeration},
-    "3": {"name": "Analizar XML-RPC", "func": check_xmlrpc},
-    "4": {"name": "Archivos Sensibles", "func": scan_sensitive_files},
-    "5": {"name": "Auditar REST API", "func": check_rest_api},
-    "6": {"name": "Escáner Plugins", "func": scan_plugins},
-    "7": {"name": "Auditoría Completa", "func": None},
-    "8": {"name": "Salir", "func": None}
-}
+    print(f"\n[✓] Log guardado en: {log_file}")
 
 def main():
     print_banner()
@@ -147,6 +119,6 @@ def main():
             clear_console()
             run_tool(url, choice)
             input(f"\n{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Presiona Enter para continuar...")
-            
+
 if __name__ == "__main__":
     main()
