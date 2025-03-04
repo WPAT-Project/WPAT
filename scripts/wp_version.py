@@ -7,9 +7,9 @@ init(autoreset=True)
 
 BANNER = f"""
 {Style.BRIGHT}{Fore.CYAN}
-╔════════════════════════════╗
-║ {Fore.WHITE}DETECCIÓN DE VERSIÓN WORDPRESS {Fore.CYAN}║
-╚════════════════════════════╝
+■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
+■ {Fore.WHITE}WORDPRESS VERSION DETECTOR {Fore.CYAN}■
+■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
 """
 
 def detect_wp_version(url):
@@ -43,6 +43,6 @@ def detect_wp_version(url):
 
     if detected_versions:
         final_version = max(set(detected_versions), key=detected_versions.count)
-        print(f"{Fore.GREEN}{Style.BRIGHT}✅ VERSIÓN DETECTADA: {Fore.WHITE}{final_version}")
+        print(f"{Fore.GREEN}[DETECTADA] Versión: {Style.BRIGHT}{final_version}")
     else:
-        print(f"{Fore.RED}{Style.BRIGHT}⚠️ VERSIÓN NO ENCONTRADA")
+        print(f"{Fore.RED}[NO DETECTADA] Versión no encontrada")
