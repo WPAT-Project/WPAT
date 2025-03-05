@@ -11,26 +11,30 @@ from scripts import (
     scan_sensitive_files,
     detect_wp_version,
     check_rest_api,
-    scan_plugins
+    scan_plugins,
+    generate_wordlists,
+    scan_themes
 )
 
 init(autoreset=True)
 
 def signal_handler(sig, frame):
-    print(f"\n{Style.BRIGHT}{Fore.RED}❌ Auditoría interrumpida! {Fore.WHITE}Saliendo...")
+    print(f"\n{Style.BRIGHT}{Fore.RED}✂ {Fore.WHITE}Auditoría interrumpida! Saliendo...")
     sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)
 
 TOOLS = {
-    "1": {"name": "Detectar Enumeración de Usuarios", "func": check_user_enumeration},
-    "2": {"name": "Analizar XML-RPC", "func": check_xmlrpc},
-    "3": {"name": "Escáner de Archivos Sensibles", "func": scan_sensitive_files},
-    "4": {"name": "Detectar Versión de WordPress", "func": detect_wp_version},
-    "5": {"name": "Auditar REST API", "func": check_rest_api},
-    "6": {"name": "Escáner de Plugins", "func": scan_plugins},
-    "7": {"name": "Auditoría Completa", "func": None},
-    "8": {"name": "Salir", "func": None}
+    "1": {"name": "Detectar Enumeración de Usuarios", "func": check_user_enumeration, "full": True},
+    "2": {"name": "Analizar XML-RPC", "func": check_xmlrpc, "full": True},
+    "3": {"name": "Escáner de Archivos Sensibles", "func": scan_sensitive_files, "full": True},
+    "4": {"name": "Detectar Versión de WordPress", "func": detect_wp_version, "full": True},
+    "5": {"name": "Auditar REST API", "func": check_rest_api, "full": True},
+    "6": {"name": "Escáner de Plugins", "func": scan_plugins, "full": False},
+    "7": {"name": "Escáner de Temas", "func": scan_themes, "full": False},    
+    "97": {"name": "Auditoría Completa", "func": None, "full": False},
+    "98": {"name": "Actualizar Wordlists", "func": generate_wordlists, "full": False},
+    "99": {"name": "Salir", "func": None, "full": False}
 }
 
 class DualOutput:
@@ -61,7 +65,7 @@ def print_banner():
  ╚══╝╚══╝ ╚═╝     ╚═╝  ╚═╝   ╚═╝   
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Fore.WHITE}       WordPress Professional Audit Tool
-{Fore.CYAN}          Versión 1.1 · Ethical Hacking
+{Fore.CYAN}          Versión 1.2 · Ethical Hacking
 {Fore.YELLOW}         Creado por Santitub | {Fore.BLUE}https://github.com/Santitub
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Style.RESET_ALL}"""
@@ -75,12 +79,13 @@ def print_menu(url):
     clear_console()
     print(f"""
 {Style.BRIGHT}{Fore.MAGENTA}►► {Fore.CYAN}PASO 2/3: {Fore.WHITE}MENÚ PRINCIPAL
-{Fore.MAGENTA}─────────────────────────────────────────────
+{Fore.MAGENTA}═══════════════════════════════════════════════
 {Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Objetivo: {Fore.YELLOW}{url}
 """)
-    for key in TOOLS:
-        print(f"{Style.BRIGHT}{Fore.CYAN} [{Fore.MAGENTA}{key}{Fore.CYAN}] {Fore.WHITE}{TOOLS[key]['name']}")
-    print(f"{Fore.MAGENTA}─────────────────────────────────────────────")
+    for key in sorted(TOOLS.keys(), key=int):
+        tool = TOOLS[key]
+        print(f"{Style.BRIGHT}{Fore.CYAN} [{Fore.MAGENTA}{key}{Fore.CYAN}] {Fore.WHITE}{tool['name']}")
+    print(f"{Fore.MAGENTA}═══════════════════════════════════════════════""")
 
 def run_tool(url, choice):
     log_dir = "logs"
@@ -91,17 +96,16 @@ def run_tool(url, choice):
     with open(log_file, 'w') as f:
         dual = DualOutput(sys.stdout, f)
         with redirect_stdout(dual):
-            if choice == '7':
-                print(f"{Style.BRIGHT}{Fore.CYAN}► {Fore.WHITE}Ejecutando auditoría completa... {Fore.YELLOW}🛡️\n")
-                for key in [k for k in TOOLS if k not in ("6", "7", "8")]:
-                    print(f"{Fore.MAGENTA}────── {TOOLS[key]['name'].upper()} {Fore.MAGENTA}──────")
+            if choice == '97':  # Auditoría Completa
+                print(f"{Style.BRIGHT}{Fore.CYAN}► {Fore.WHITE}Ejecutando auditoría completa...\n")
+                for key in [k for k, v in TOOLS.items() if v['full']]:
+                    print(f"{Fore.MAGENTA}════════════ {TOOLS[key]['name'].upper()} {Fore.MAGENTA}════════════")
                     TOOLS[key]['func'](url)
                     print()
             else:
-                if TOOLS[choice]['func']:
-                    TOOLS[choice]['func'](url)
+                TOOLS[choice]['func'](url)
 
-    print(f"\n[✓] Log guardado en: {log_file}")
+    print(f"\n{Style.BRIGHT}{Fore.GREEN}✓ {Fore.WHITE}Log guardado en: {Fore.YELLOW}{log_file}")
 
 def main():
     print_banner()
@@ -109,16 +113,25 @@ def main():
     
     while True:
         print_menu(url)
-        choice = input(f"{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Selección {Fore.YELLOW}(1-8){Fore.WHITE}: ").strip()
+        choice = input(f"{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Selección {Fore.YELLOW}(1-99){Fore.WHITE}: ").strip()
 
-        if choice == '8':
-            print(f"\n{Style.BRIGHT}{Fore.CYAN}► {Fore.MAGENTA}¡Auditoría finalizada! {Fore.YELLOW}🛡️\n")
+        if choice == '99':
+            print(f"\n{Style.BRIGHT}{Fore.CYAN}► {Fore.MAGENTA}¡Auditoría finalizada! {Fore.YELLOW}\n")
             break
             
-        if choice in ['1', '2', '3', '4', '5', '6', '7']:
-            clear_console()
-            run_tool(url, choice)
-            input(f"\n{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Presiona Enter para continuar...")
+        if choice in TOOLS:
+            if choice in ['97', '98']:  # Opciones especiales
+                clear_console()
+                run_tool(url, choice)
+                input(f"\n{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Presiona Enter para continuar...")
+            elif TOOLS[choice]['func']:
+                clear_console()
+                run_tool(url, choice)
+                input(f"\n{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Presiona Enter para continuar...")
+            else:
+                print(f"\n{Fore.RED}⚠ Opción sin funcionalidad asignada{Style.RESET_ALL}")
+        else:
+            print(f"\n{Fore.RED}⚠ Opción inválida{Style.RESET_ALL}")
 
 if __name__ == "__main__":
     main()
