@@ -76,7 +76,7 @@ python main.py
 ## 📂 Estructura del Proyecto
 
 ```
-wp-audit-toolkit/
+WPAT/
 ├── main.py             # Script principal
 ├── requirements.txt    # Dependencias
 ├── logs/               # Registros de auditorías
