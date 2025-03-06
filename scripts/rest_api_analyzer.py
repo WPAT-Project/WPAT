@@ -17,7 +17,13 @@ def check_rest_api(url):
         "/wp-json/wp/v2/posts?per_page=1",
         "/wp-json/wp/v2/comments",
         "/wp-json/wp/v2/settings",
-        "/wp-json/wp/v2/taxonomies"
+        "/wp-json/wp/v2/taxonomies",
+        "/wp-json/wp/v2/pages",
+        "/wp-json/wp/v2/media",
+        "/wp-json/wp/v2/categories",
+        "/wp-json/wp/v2/tags",
+        "/wp-json/wp/v2/types",
+        "/wp-json/wp/v2/statuses",
     ]
     
     print(f"{Fore.CYAN}[INFO] Probando {len(endpoints)} endpoints...")
