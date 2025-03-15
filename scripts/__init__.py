@@ -6,3 +6,4 @@ from .rest_api_analyzer import check_rest_api
 from .plugin_scanner import scan_plugins
 from .wordlists import generate_wordlists
 from .theme_scanner import scan_themes
+from .login import brute_force
