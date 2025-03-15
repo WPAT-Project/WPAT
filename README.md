@@ -15,7 +15,8 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 🔖 Fingerprinting de Versión de WordPress
   - 📡 Auditoría de Endpoints REST API
   - 🧩 Escáner de Plugins (detecta instalaciones activas)
-  - 🎨 **Nuevo** Escáner de Temas (detección por estilo CSS)
+  - 🎨 Escáner de Temas (detección por estilo CSS)
+  - 🔓 **Nuevo** Fuerza Bruta Optimizada (Login WordPress)
 
 - 🛠 **Funcionalidades Clave:**
   - 🎨 Interfaz intuitiva con sistema de colores y banners ASCII
@@ -24,7 +25,12 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 🌀 Barra de progreso inteligente que desaparece al finalizar
   - 🚨 Sistema mejorado de manejo de errores
   - 🔄 Menú interactivo con navegación simplificada
-  - 📦 **Nuevo** Generador de Wordlists Oficiales (Plugins/Temas)
+  - 📦 Generador de Wordlists Oficiales (Plugins/Temas)
+  - 🚀 **Nuevo** Motor de fuerza bruta con:
+    - Carga optimizada de wordlists grandes (>1M entradas)
+    - Detección inteligente de nonce de seguridad
+    - Parada inmediata al éxito
+    - Verificación de cookies de sesión
 
 ## 📦 Instalación
 
@@ -70,7 +76,8 @@ python main.py
 [4] Detectar Versión de WordPress
 [5] Auditar REST API
 [6] Escáner de Plugins
-[7] Escáner de Temas (Nuevo)
+[7] Escáner de Temas 
+[8] Fuerza Bruta en Login (Nuevo)
 ```
 
 ## 📂 Estructura del Proyecto
@@ -89,27 +96,31 @@ WPAT/
     ├── wp_version.py
     ├── rest_api_analyzer.py
     ├── plugin_scanner.py
-    ├── theme_scanner.py   # Nuevo módulo
-    └── wordlists.py       # Generador de wordlists
+    ├── theme_scanner.py
+    ├── brute_force.py     # Nuevo módulo
+    └── wordlists.py
 ```
 
-## 🆕 Novedades en v1.2
-- ✨ **Escáner de Temas Avanzado:**
-  - Detección por archivo `style.css`
-  - Clasificación por códigos 200/403
-  - Soporte para wordlists personalizadas
-- 📚 **Generador de Wordlists:**
-  - Descarga directa desde repositorios oficiales
-  - Opción para plugins y/o temas
-  - Guardado automático en `/wordlists`
+## 🆕 Novedades en v1.3
+- 🔓 **Motor de Fuerza Bruta Avanzado:**
+  - Soporte para wordlists de más de 10M de entradas
+  - Carga progresiva en bloques (50k líneas)
+  - Detección de redirecciones exitosas (302)
+  - Sistema anti-DoS con delays aleatorios
+  - Auto-detección de URL de login
+- 🚀 **Optimizaciones de Rendimiento:**
+  - ThreadPoolExecutor mejorado
+  - Sesiones HTTP reutilizables
+  - Cache de nonce para múltiples intentos
+  - Uso de memoria reducido (<500MB para 1M creds)
 - 🖥️ **Mejoras de Interfaz:**
-  - Sistema de numeración profesional (97-99)
-  - Parámetro `full` para auditorías completas
-  - Mensajes contextuales con emojis
-- 🛠️ **Optimizaciones:**
-  - ThreadPoolExecutor para descargas rápidas
-  - Manejo de rutas multiplataforma
-  - Validación mejorada de entradas
+  - Progreso en tiempo real con estadísticas
+  - Mensajes de error detallados
+  - Soporte para Ctrl+C con limpieza segura
+- 🛠️ **Configuraciones Adicionales:**
+  - Timeout personalizable por request
+  - Límite de hilos ajustable
+  - Soporte para credenciales individuales
 
 ## 📜 Licencia y Ética
 
