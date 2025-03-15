@@ -13,7 +13,8 @@ from scripts import (
     check_rest_api,
     scan_plugins,
     generate_wordlists,
-    scan_themes
+    scan_themes,
+    brute_force
 )
 
 init(autoreset=True)
@@ -32,6 +33,7 @@ TOOLS = {
     "5": {"name": "Auditar REST API", "func": check_rest_api, "full": True},
     "6": {"name": "Escáner de Plugins", "func": scan_plugins, "full": False},
     "7": {"name": "Escáner de Temas", "func": scan_themes, "full": False},    
+    "8": {"name": "Fuerza Bruta en Login", "func": brute_force, "full": False},
     "97": {"name": "Auditoría Completa", "func": None, "full": False},
     "98": {"name": "Actualizar Wordlists", "func": generate_wordlists, "full": False},
     "99": {"name": "Salir", "func": None, "full": False}
