@@ -16,7 +16,7 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 📡 Auditoría de Endpoints REST API
   - 🧩 Escáner de Plugins (detecta instalaciones activas)
   - 🎨 Escáner de Temas (detección por estilo CSS)
-  - 🔓 **Nuevo** Fuerza Bruta Optimizada (Login WordPress)
+  - 🔓 Fuerza Bruta Optimizada (Login WordPress)
 
 - 🛠 **Funcionalidades Clave:**
   - 🎨 Interfaz intuitiva con sistema de colores y banners ASCII
@@ -26,7 +26,7 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 🚨 Sistema mejorado de manejo de errores
   - 🔄 Menú interactivo con navegación simplificada
   - 📦 Generador de Wordlists Oficiales (Plugins/Temas)
-  - 🚀 **Nuevo** Motor de fuerza bruta con:
+  - 🚀 Motor de fuerza bruta con:
     - Carga optimizada de wordlists grandes (>1M entradas)
     - Detección inteligente de nonce de seguridad
     - Parada inmediata al éxito
@@ -101,26 +101,34 @@ WPAT/
     └── wordlists.py
 ```
 
-## 🆕 Novedades en v1.3
-- 🔓 **Motor de Fuerza Bruta Avanzado:**
-  - Soporte para wordlists de más de 10M de entradas
-  - Carga progresiva en bloques (50k líneas)
-  - Detección de redirecciones exitosas (302)
-  - Sistema anti-DoS con delays aleatorios
-  - Auto-detección de URL de login
-- 🚀 **Optimizaciones de Rendimiento:**
-  - ThreadPoolExecutor mejorado
-  - Sesiones HTTP reutilizables
-  - Cache de nonce para múltiples intentos
-  - Uso de memoria reducido (<500MB para 1M creds)
-- 🖥️ **Mejoras de Interfaz:**
-  - Progreso en tiempo real con estadísticas
-  - Mensajes de error detallados
-  - Soporte para Ctrl+C con limpieza segura
-- 🛠️ **Configuraciones Adicionales:**
-  - Timeout personalizable por request
-  - Límite de hilos ajustable
-  - Soporte para credenciales individuales
+## 🆕 Novedades en v1.4
+
+### 🎨 Mejoras de Visualización
+- **Sistema de Reportes Unificado:**  
+  - Resultados con colores ANSI compatibles con todos los terminales  
+  - Símbolos descriptivos: `[CRÍTICO]`, `[ADVERTENCIA]`, `[SEGURO]`  
+  - Resúmenes ejecutivos al final de cada escaneo  
+
+- **Enumeración de Usuarios Mejorada:**  
+  - Detección de nombres reales (no solo IDs numéricos)  
+  - Exportación de resultados en formato lista  
+  - Clasificación por métodos de exposición  
+
+- **REST API Auditor 2.0:**  
+  - Nueva lista de 11 endpoints críticos verificados  
+  - Detección de configuración expuesta (`/wp-json/wp/v2/settings`)  
+  - Conteo de registros accesibles en tiempo real  
+
+### ⚙️ Optimizaciones Técnicas
+- **Motor de Escaneo:**  
+  - Timeout configurable por endpoint (1-30 segundos)  
+  - Manejo mejorado de respuestas JSON malformadas  
+  - Detección de WAF (Web Application Firewalls)  
+
+- **Compatibilidad:**  
+  - Soporte para WordPress Multisite  
+  - Certificados SSL autofirmados  
+  - Encoding UTF-8 forzado en todas las respuestas  
 
 ## 📜 Licencia y Ética
 
