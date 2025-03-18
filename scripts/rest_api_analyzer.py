@@ -5,13 +5,25 @@ init(autoreset=True)
 
 BANNER = f"""
 {Style.BRIGHT}{Fore.CYAN}
-■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
-■ {Fore.WHITE}REST API AUDITOR {Fore.CYAN}■
-■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
+■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
+■ {Fore.WHITE}REST API SECURITY AUDITOR {Fore.CYAN}■
+■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
 """
+
+def print_status(message, status, extra_info=""):
+    status_colors = {
+        "safe": Fore.GREEN,
+        "warning": Fore.YELLOW,
+        "danger": Fore.RED,
+        "info": Fore.CYAN
+    }
+    print(f"{status_colors[status]}{Style.BRIGHT}[{status.upper()}] {Fore.WHITE}{message} {extra_info}")
 
 def check_rest_api(url):
     print(BANNER)
+    target_url = url.rstrip("/") + "/"
+    print_status(f"Scanning REST API:", "info", Fore.YELLOW + target_url)
+    
     endpoints = [
         "/wp-json/wp/v2/users",
         "/wp-json/wp/v2/posts?per_page=1",
@@ -26,18 +38,25 @@ def check_rest_api(url):
         "/wp-json/wp/v2/statuses",
     ]
     
-    print(f"{Fore.CYAN}[INFO] Probando {len(endpoints)} endpoints...")
-    
     for endpoint in endpoints:
         try:
-            response = requests.get(f"{url}{endpoint}", timeout=5, headers={'User-Agent': 'WP Audit Tool'})
+            full_url = f"{target_url}{endpoint.lstrip('/')}"
+            response = requests.get(
+                full_url,
+                timeout=10,
+                headers={'User-Agent': 'WP Audit Tool'}
+            )
+            
             if response.status_code == 200:
                 data = response.json()
-                if isinstance(data, list) and len(data) > 0:
-                    print(f"{Fore.GREEN}[ABIERTO] {endpoint} ({len(data)} resultados)")
+                if data:
+                    detail = f"{Fore.YELLOW}({len(data) if isinstance(data, list) else 'data'})"
+                    status = "danger" if isinstance(data, list) else "warning"
+                    print_status(f"{endpoint}", status, detail)
                 else:
-                    print(f"{Fore.YELLOW}[ACCESIBLE] {endpoint} (sin datos)")
+                    print_status(f"{endpoint}", "warning", f"{Fore.YELLOW}(empty)")
             else:
-                print(f"{Fore.RED}[PROTEGIDO] {endpoint}")
-        except:
-            print(f"{Fore.RED}[ERROR] No se pudo verificar {endpoint}")
+                print_status(f"{endpoint}", "safe", f"{Fore.CYAN}(code {response.status_code})")
+                
+        except Exception as e:
+            print_status(f"{endpoint}", "danger", f"{Fore.RED}[Error: {str(e)}]")
