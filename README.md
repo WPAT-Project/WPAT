@@ -23,14 +23,10 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 📁 Generación automática de logs detallados con marca temporal
   - ⚡ Escaneo multi-hilos configurable (1-50 hilos)
   - 🌀 Barra de progreso inteligente que desaparece al finalizar
-  - 🚨 Sistema mejorado de manejo de errores
+  - 🚨 Sistema mejorado de manejo de errores y Ctrl+C
   - 🔄 Menú interactivo con navegación simplificada
   - 📦 Generador de Wordlists Oficiales (Plugins/Temas)
-  - 🚀 Motor de fuerza bruta con:
-    - Carga optimizada de wordlists grandes (>1M entradas)
-    - Detección inteligente de nonce de seguridad
-    - Parada inmediata al éxito
-    - Verificación de cookies de sesión
+  - 🔄 **Carga unificada de wordlists** para todos los módulos
 
 ## 📦 Instalación
 
@@ -62,13 +58,14 @@ python main.py
 **Flujo de trabajo:**
 1. Ingresa URL objetivo
 2. Selecciona módulos desde el menú interactivo
-3. Para escaneos de plugins/temas:
-   - Proporciona ruta de wordlist
-   - Configura hilos (1-50) y timeout
-4. Analiza resultados en tiempo real
+3. Para escaneos de plugins/temas/fuerza bruta:
+   - ⚡ Proporciona ruta de wordlist (detección automática de encoding)
+   - 📊 Visualiza estadísticas de carga (tiempo/líneas)
+   - ⚙️ Configura hilos (1-50) y timeout
+4. Analiza resultados en tiempo real con salida limpia
 5. Revisa logs detallados en `/logs`
 
-**Menú Principal Actualizado:**
+**Menú Principal:**
 ```
 [1] Detectar Enumeración de Usuarios      [97] Auditoría Completa
 [2] Analizar XML-RPC                      [98] Generar Wordlists
@@ -101,34 +98,14 @@ WPAT/
     └── wordlists.py
 ```
 
-## 🆕 Novedades en v1.4
+## 🆕 Novedades en v1.5
 
-### 🎨 Mejoras de Visualización
-- **Sistema de Reportes Unificado:**  
-  - Resultados con colores ANSI compatibles con todos los terminales  
-  - Símbolos descriptivos: `[CRÍTICO]`, `[ADVERTENCIA]`, `[SEGURO]`  
-  - Resúmenes ejecutivos al final de cada escaneo  
-
-- **Enumeración de Usuarios Mejorada:**  
-  - Detección de nombres reales (no solo IDs numéricos)  
-  - Exportación de resultados en formato lista  
-  - Clasificación por métodos de exposición  
-
-- **REST API Auditor 2.0:**  
-  - Nueva lista de 11 endpoints críticos verificados  
-  - Detección de configuración expuesta (`/wp-json/wp/v2/settings`)  
-  - Conteo de registros accesibles en tiempo real  
-
-### ⚙️ Optimizaciones Técnicas
-- **Motor de Escaneo:**  
-  - Timeout configurable por endpoint (1-30 segundos)  
-  - Manejo mejorado de respuestas JSON malformadas  
-  - Detección de WAF (Web Application Firewalls)  
-
-- **Compatibilidad:**  
-  - Soporte para WordPress Multisite  
-  - Certificados SSL autofirmados  
-  - Encoding UTF-8 forzado en todas las respuestas  
+### 🚀 Motor de Fuerza Bruta Mejorado
+- **Carga Inteligente de Wordlists:**
+  - ⏱️ 2x más rápido en archivos grandes (>1GB)
+  - 🔍 Detección automática de encoding (UTF-8/Latin-1/CP1252)
+  - 🛠️ Sistema unificado de carga para todos los módulos
+  - 📈 Estadísticas de carga (líneas/tiempo/encoding)
 
 ## 📜 Licencia y Ética
 
