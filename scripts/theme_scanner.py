@@ -27,6 +27,25 @@ def handle_sigint(signum, frame):
 
 signal.signal(signal.SIGINT, handle_sigint)
 
+def cargar_wordlist(ruta):
+    encodings = ['utf-8', 'latin-1', 'iso-8859-1', 'cp1252']
+    for encoding in encodings:
+        try:
+            with open(ruta, 'r', encoding=encoding, errors='strict') as f:
+                contenido = f.read()
+                print(f"{Fore.GREEN}✅ Encoding detectado: {encoding}{Style.RESET_ALL}")
+                return [linea.strip() for linea in contenido.splitlines() if linea.strip()], len(contenido.splitlines())
+        except UnicodeDecodeError:
+            continue
+    
+    try:
+        with open(ruta, 'r', encoding='latin-1', errors='replace') as f:
+            lineas = f.readlines()
+            print(f"{Fore.YELLOW}⚠️  Usando encoding latín-1 con reemplazo{Style.RESET_ALL}")
+            return [linea.strip() for linea in lineas if linea.strip()], len(lineas)
+    except Exception as e:
+        raise ValueError(f"Error de carga: {str(e)}")
+
 def check_theme(target_url, theme, timeout=15):
     global shutdown
     if shutdown:
@@ -57,9 +76,17 @@ def scan_themes(url):
 
     print(BANNER)
     
-    # Parámetros del escáner
     print(f"{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Wordlist de temas (ruta): ", end="")
     wordlist_path = input().strip()
+    
+    try:
+        start_time = time.time()
+        themes, total_lineas = cargar_wordlist(wordlist_path)
+        tiempo_carga = time.time() - start_time
+        print(f"{Fore.CYAN}[i] {total_lineas} temas cargados en {tiempo_carga:.2f}s{Style.RESET_ALL}")
+    except Exception as e:
+        print(f"\n{Fore.RED}[!] Error: {str(e)}{Style.RESET_ALL}")
+        return
     
     print(f"{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Hilos (10): ", end="")
     threads = input().strip() or "10"
@@ -69,13 +96,6 @@ def scan_themes(url):
     
     threads = int(threads)
     timeout = int(timeout)
-
-    try:
-        with open(wordlist_path, 'r', errors='ignore') as f:
-            themes = [line.strip() for line in f if line.strip()]
-    except FileNotFoundError:
-        print(f"\n{Fore.RED}[!] Error: Wordlist no encontrada{Style.RESET_ALL}")
-        return
 
     found = []
     possible = []
@@ -115,7 +135,6 @@ def scan_themes(url):
     finally:
         print("\033[K", end="")
 
-    # Resultados
     print(f"\n{Style.BRIGHT}{Fore.CYAN}►► {Fore.WHITE}RESULTADOS")
     print(f"{Fore.CYAN}├───────────────{Fore.WHITE}───────────────────────┤")
     print(f"{Fore.CYAN}│ {Fore.GREEN}✔ Detectados: {Fore.WHITE}{len(found):<18} {Fore.CYAN}│")

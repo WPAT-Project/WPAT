@@ -27,6 +27,25 @@ def handle_sigint(signum, frame):
 
 signal.signal(signal.SIGINT, handle_sigint)
 
+def cargar_wordlist(ruta):
+    encodings = ['utf-8', 'latin-1', 'iso-8859-1', 'cp1252']
+    for encoding in encodings:
+        try:
+            with open(ruta, 'r', encoding=encoding, errors='strict') as f:
+                contenido = f.read()
+                print(f"{Fore.GREEN}✅ Encoding detectado: {encoding}{Style.RESET_ALL}")
+                return [linea.strip() for linea in contenido.splitlines() if linea.strip()], len(contenido.splitlines())
+        except UnicodeDecodeError:
+            continue
+    
+    try:
+        with open(ruta, 'r', encoding='latin-1', errors='replace') as f:
+            lineas = f.readlines()
+            print(f"{Fore.YELLOW}⚠️  Usando encoding latín-1 con reemplazo{Style.RESET_ALL}")
+            return [linea.strip() for linea in lineas if linea.strip()], len(lineas)
+    except Exception as e:
+        raise ValueError(f"Error de carga: {str(e)}")
+
 def check_plugin(target_url, plugin, timeout=15):
     global shutdown
     if shutdown:
@@ -57,9 +76,17 @@ def scan_plugins(url):
 
     print(BANNER)
     
-    # Solicitar parámetros del escáner
     print(f"{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Wordlist (ruta): ", end="")
     wordlist_path = input().strip()
+    
+    try:
+        start_time = time.time()
+        plugins, total_lineas = cargar_wordlist(wordlist_path)
+        tiempo_carga = time.time() - start_time
+        print(f"{Fore.CYAN}[i] {total_lineas} plugins cargados en {tiempo_carga:.2f}s{Style.RESET_ALL}")
+    except Exception as e:
+        print(f"\n{Fore.RED}[!] Error: {str(e)}{Style.RESET_ALL}")
+        return
     
     print(f"{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Hilos (10): ", end="")
     threads = input().strip() or "10"
@@ -69,13 +96,6 @@ def scan_plugins(url):
     
     threads = int(threads)
     timeout = int(timeout)
-
-    try:
-        with open(wordlist_path, 'r', errors='ignore') as f:
-            plugins = [line.strip() for line in f if line.strip()]
-    except FileNotFoundError:
-        print(f"\n{Fore.RED}[!] Error: Wordlist no encontrada{Style.RESET_ALL}")
-        return
 
     found = []
     possible = []
@@ -115,7 +135,6 @@ def scan_plugins(url):
     finally:
         print("\033[K", end="")
 
-    # Resultados finales
     print(f"\n{Style.BRIGHT}{Fore.CYAN}►► {Fore.WHITE}RESULTADOS")
     print(f"{Fore.CYAN}├───────────────{Fore.WHITE}───────────────────────┤")
     print(f"{Fore.CYAN}│ {Fore.GREEN}✔ Confirmados: {Fore.WHITE}{len(found):<18} {Fore.CYAN}│")
