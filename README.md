@@ -110,4 +110,3 @@ Distribuido bajo licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
 
 **⚠️ Nota de Uso Ético:**  
 Este software debe usarse únicamente en sistemas con permiso explícito del propietario. Incluye características avanzadas que podrían ser consideradas intrusivas si se usan sin autorización. El mal uso es responsabilidad exclusiva del usuario final.
-```
