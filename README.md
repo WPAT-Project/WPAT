@@ -1,7 +1,7 @@
 # 🛡️ WP Audit Toolkit - Ethical WordPress Security Auditor
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)  
-![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)  
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained-Yes-brightgreen.svg)
 
 Herramienta profesional de auditoría de seguridad para sitios WordPress (uso ético exclusivo)
