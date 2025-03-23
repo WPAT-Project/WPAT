@@ -14,7 +14,8 @@ from scripts import (
     scan_plugins,
     generate_wordlists,
     scan_themes,
-    brute_force
+    brute_force,
+    check_ssl
 )
 
 init(autoreset=True)
@@ -34,6 +35,7 @@ TOOLS = {
     "6": {"name": "Escáner de Plugins", "func": scan_plugins, "full": False},
     "7": {"name": "Escáner de Temas", "func": scan_themes, "full": False},    
     "8": {"name": "Fuerza Bruta en Login", "func": brute_force, "full": False},
+    "9": {"name": "Verificar Certificado SSL", "func": check_ssl, "full": True},
     "97": {"name": "Auditoría Completa", "func": None, "full": False},
     "98": {"name": "Actualizar Wordlists", "func": generate_wordlists, "full": False},
     "99": {"name": "Salir", "func": None, "full": False}
@@ -67,7 +69,7 @@ def print_banner():
  ╚══╝╚══╝ ╚═╝     ╚═╝  ╚═╝   ╚═╝   
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Fore.WHITE}       WordPress Professional Audit Tool
-{Fore.CYAN}          Versión 1.5 · Ethical Hacking
+{Fore.CYAN}          Versión 1.6 · Ethical Hacking
 {Fore.YELLOW}         Creado por Santitub | {Fore.BLUE}https://github.com/Santitub
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Style.RESET_ALL}"""
