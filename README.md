@@ -17,7 +17,7 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 🧩 Escáner de Plugins (detecta instalaciones activas)
   - 🎨 Escáner de Temas (detección por estilo CSS)
   - 🔓 Fuerza Bruta Optimizada (Login WordPress)
-  - 🔐  **Nuevo** Auditoría SSL/TLS (Certificados y Cifrado)
+  - 🔐 Auditoría SSL/TLS (Certificados y Cifrado)
     
 - 🛠 **Funcionalidades Clave:**
   - 🎨 Interfaz intuitiva con sistema de colores y banners ASCII
@@ -94,15 +94,17 @@ WPAT/
     └── brute_force.py
 ```
 
-## 🆕 Novedades en v1.6
+## 🆕 Novedades en v1.7
 
-### 🔐 Módulo de Auditoría SSL/TLS
-- **Verificación Completa de Certificados:**
-  - 📅 Detección de fecha de expiración (UTC)
-  - 🚨 Alertas de certificados vencidos
-  - 🔍 Identificación del emisor (CA)
-  - 🛡️ Protocolos y cifrados soportados
-  - 🌐 Compatibilidad con dominios complejos (subdominios/www)
+### 🛡️ Mejoras en Auditoría XML-RPC
+- **Detección Avanzada de Servidores Ocultos:**
+  - 🔍 Técnicas combinadas para evadir ocultamiento (respuestas a métodos inválidos y análisis estructural)
+  - 🕵️ Identificación de firmas XML-RPC incluso con mensajes personalizados
+
+- **Nuevos Métodos Verificados:**
+  - ⚠️ `system.multicall`: Detección de ejecución múltiple de métodos
+  - 🌐 `pingback.ping`: Alerta de posibles vectores DDoS
+  - 🔑 `wp.getUsersBlogs`: Identificación de riesgo de fuerza bruta
 
 ## 📜 Licencia y Ética
 
