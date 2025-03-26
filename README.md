@@ -70,7 +70,7 @@ python main.py
 [6] Escáner de Plugins
 [7] Escáner de Temas 
 [8] Fuerza Bruta en Login
-[9] Verificar Certificado SSL (Nuevo)
+[9] Verificar Certificado SSL
 ```
 
 ## 📂 Estructura del Proyecto
@@ -83,7 +83,7 @@ WPAT/
 ├── wordlists/          # Listas oficiales generadas
 └── scripts/            # Módulos de auditoría
     ├── __init__.py
-    ├── ssl_checker.py    # Nuevo módulo SSL
+    ├── ssl_checker.py
     ├── user_enumeration.py
     ├── xmlrpc_analyzer.py
     ├── sensitive_files.py
