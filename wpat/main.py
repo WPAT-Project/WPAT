@@ -7,7 +7,7 @@ import signal
 import datetime
 from colorama import Fore, Style, init
 from contextlib import redirect_stdout
-from scripts import (
+from wpat.scripts import (
     check_user_enumeration,
     check_xmlrpc,
     scan_sensitive_files,
