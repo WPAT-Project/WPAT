@@ -3,6 +3,7 @@
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained-Yes-brightgreen.svg)
+![Installation](https://img.shields.io/badge/Installation-pipx%20%7C%20git-blueviolet)
 
 Herramienta profesional de auditoría de seguridad para sitios WordPress (uso ético exclusivo)
 
@@ -29,18 +30,42 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
 
 ## 📦 Instalación
 
-**Requisitos:**
-- Python 3.8+
-- pip (Gestor de paquetes Python)
+### Método 1: Instalación con pipx (Recomendado)
+**Para una instalación global y aislada:**
+```bash
+# Instalar pipx si no está disponible
+python -m pip install --user pipx
+python -m pipx ensurepath
 
+# Instalar WPAT
+pipx install git+https://github.com/Santitub/WPAT.git
+
+# Ejecutar (desde cualquier directorio)
+wpat
+```
+
+### Método 2: Instalación tradicional (desarrollo)
 ```bash
 # Clonar repositorio
 git clone https://github.com/Santitub/WPAT.git
 cd WPAT
 
+# Crear entorno virtual (opcional)
+python -m venv venv
+source venv/bin/activate  # Linux/MacOS
+# venv\Scripts\activate  # Windows
+
 # Instalar dependencias
 pip install -r requirements.txt
+
+# Ejecutar
+python main.py
 ```
+
+**Requisitos del sistema:**
+- Python 3.8+ con pip
+- pipx (para instalación global)
+- Conexión a internet para descargas
 
 **Dependencias:**
 - `colorama` - Sistema de colores para consola
@@ -51,6 +76,10 @@ pip install -r requirements.txt
 ## 🖥️ Uso
 
 ```bash
+# Para instalación con pipx:
+wpat
+
+# Para instalación tradicional:
 python main.py
 ```
 
@@ -94,17 +123,14 @@ WPAT/
     └── brute_force.py
 ```
 
-## 🆕 Novedades en v1.7
+## 🆕 Novedades en v1.8
 
-### 🛡️ Mejoras en Auditoría XML-RPC
-- **Detección Avanzada de Servidores Ocultos:**
-  - 🔍 Técnicas combinadas para evadir ocultamiento (respuestas a métodos inválidos y análisis estructural)
-  - 🕵️ Identificación de firmas XML-RPC incluso con mensajes personalizados
-
-- **Nuevos Métodos Verificados:**
-  - ⚠️ `system.multicall`: Detección de ejecución múltiple de métodos
-  - 🌐 `pingback.ping`: Alerta de posibles vectores DDoS
-  - 🔑 `wp.getUsersBlogs`: Identificación de riesgo de fuerza bruta
+### 🚀 Soporte de Instalación via pipx
+- **Instalación Global Simplificada:**
+  - 📦 Integración con pipx para manejo de dependencias aislado
+  - 🔄 Comando único de instalación: `pipx install git+https://github.com/Santitub/WPAT.git`
+  - 🖥️ Acceso directo `wpat` disponible en cualquier directorio
+  - 🛡️ Entorno virtual automático para mayor seguridad
 
 ## 📜 Licencia y Ética
 
