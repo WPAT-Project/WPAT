@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="wpat",
-    version="1.8",
+    version="1.9",
     author="Santitub",
     author_email="tu@email.com",
     description="WPAT (WP Audit Toolkit) es una herramienta de auditoría de seguridad para WordPress que detecta vulnerabilidades comunes y expone riesgos de manera eficiente.",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/Santitub/WPAT",  # Actualiza con tu URL real
+    url="https://github.com/Santitub/WPAT",
     packages=find_packages(include=["wpat", "wpat.*"]),
     install_requires=[
         'colorama',
@@ -18,11 +18,11 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'wpat=wpat.main:main'  # Ruta completa al módulo
+            'wpat=wpat.main:main'
         ]
     },
     classifiers=[
-        'Development Status :: 5 - Production/Stable',  # Actualiza si corresponde
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Information Technology',
         'Topic :: Security',
         'Operating System :: OS Independent',
