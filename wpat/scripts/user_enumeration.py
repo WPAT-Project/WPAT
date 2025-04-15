@@ -5,9 +5,9 @@ init(autoreset=True)
 
 BANNER = f"""
 {Style.BRIGHT}{Fore.CYAN}
-■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
+■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
 ■ {Fore.WHITE}USER ENUMERATION DETECTOR {Fore.CYAN}■
-■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
+■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
 """
 
 def print_status(message, status):

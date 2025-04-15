@@ -5,9 +5,9 @@ init(autoreset=True)
 
 BANNER = f"""
 {Style.BRIGHT}{Fore.CYAN}
-■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
+■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
 ■ {Fore.WHITE}XML-RPC SECURITY AUDITOR {Fore.CYAN}■
-■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
+■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
 """
 
 def print_status(message, status, prefix=""):

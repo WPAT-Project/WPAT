@@ -10,9 +10,9 @@ init(autoreset=True)
 
 BANNER = f"""
 {Style.BRIGHT}{Fore.CYAN}
-■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
+■▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀■
 ■ {Fore.WHITE}WORDPRESS WORDLIST GENERATOR {Fore.CYAN}■
-■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
+■▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄■
 {Style.RESET_ALL}"""
 
 HEADERS = {

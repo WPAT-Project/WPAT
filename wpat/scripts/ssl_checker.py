@@ -1,4 +1,3 @@
-# ssl_checker.py
 import ssl
 import socket
 import re
