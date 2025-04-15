@@ -44,7 +44,10 @@ pipx install git+https://github.com/Santitub/WPAT.git
 wpat
 ```
 
-### Método 2: Instalación tradicional (desarrollo)
+### ⚙️ Método 2: Instalación tradicional *(modo desarrollo — actualmente no disponible)*
+
+> ⚠️ **Nota:** Este método está pensado para entornos de desarrollo. Actualmente no se encuentra funcional.
+
 ```bash
 # Clonar repositorio
 git clone https://github.com/Santitub/WPAT.git
@@ -123,14 +126,13 @@ WPAT/
     └── brute_force.py
 ```
 
-## 🆕 Novedades en v1.8
+## 🆕 Novedades en v1.9
 
-### 🚀 Soporte de Instalación via pipx
-- **Instalación Global Simplificada:**
-  - 📦 Integración con pipx para manejo de dependencias aislado
-  - 🔄 Comando único de instalación: `pipx install git+https://github.com/Santitub/WPAT.git`
-  - 🖥️ Acceso directo `wpat` disponible en cualquier directorio
-  - 🛡️ Entorno virtual automático para mayor seguridad
+- 🖼️ **Mejoras en los banners de los módulos**
+
+- 🔐 **Optimización en la detección de archivos sensibles**  
+
+- 🔎 **Mejoras en la detección de la versión de WordPress**
 
 ## 📜 Licencia y Ética
 
