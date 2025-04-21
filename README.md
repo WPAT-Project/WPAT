@@ -65,6 +65,24 @@ pip install -r requirements.txt
 python main.py
 ```
 
+### Método 3: Instalación con Docker 🐳
+
+**Para una instalación rápida utilizando Docker:**
+
+```bash
+# Instalar Docker (si no está instalado) 🔧
+sudo apt update
+sudo apt install docker.io
+
+# Descargar la imagen de WPAT 📥
+sudo docker pull santitub/wpat
+
+# Ejecutar el contenedor de WPAT 🚀
+sudo docker run -it santitub/wpat
+```
+
+Este método permite ejecutar WPAT de forma aislada utilizando Docker 🐋, sin necesidad de instalar dependencias en tu sistema local.
+
 **Requisitos del sistema:**
 - Python 3.8+ con pip
 - pipx (para instalación global)
