@@ -78,7 +78,7 @@ sudo apt install docker.io
 sudo docker pull santitub/wpat
 
 # Ejecutar el contenedor de WPAT 🚀
-sudo docker run -it santitub/wpat
+sudo docker run -it --rm santitub/wpat
 ```
 
 Este método permite ejecutar WPAT de forma aislada utilizando Docker 🐋, sin necesidad de instalar dependencias en tu sistema local.
