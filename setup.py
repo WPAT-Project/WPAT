@@ -26,7 +26,7 @@ setup(
         'Intended Audience :: Information Technology',
         'Topic :: Security',
         'Operating System :: OS Independent',
-        'License :: OSI Approved :: GPL-3.0 License',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.11',
