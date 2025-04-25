@@ -1,6 +1,6 @@
 # 🛡️ WP Audit Toolkit - Ethical WordPress Security Auditor
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)
 ![Maintenance](https://img.shields.io/badge/Maintained-Yes-brightgreen.svg)
 ![Installation](https://img.shields.io/badge/Installation-pipx%20%7C%20git-blueviolet)
