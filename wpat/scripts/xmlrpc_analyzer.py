@@ -1,5 +1,6 @@
 import requests
 from colorama import Fore, Style, init
+import xml.etree.ElementTree as ET
 
 init(autoreset=True)
 
@@ -25,18 +26,14 @@ def print_status(message, status, prefix=""):
         print(f"{status_colors[status]}[{status.upper()}] {Fore.WHITE}{message}")
 
 def is_xmlrpc_active(target_url):
-    """Mejor detección con múltiples técnicas"""
     try:
-        # Método 1: Solicitud básica de listado de métodos
         payload = """<?xml version='1.0'?><methodCall><methodName>system.listMethods</methodName></methodCall>"""
         response = requests.post(target_url, data=payload, headers={'Content-Type': 'text/xml'}, timeout=10)
         
-        # Detectar firmas XML-RPC
         xmlrpc_signatures = ["methodResponse", "array>", "faultCode"]
         if any(sig in response.text for sig in xmlrpc_signatures):
             return True
-        
-        # Método 2: Respuesta a método inexistente
+            
         invalid_response = requests.post(
             target_url,
             data="""<?xml version='1.0'?><methodCall><methodName>fake.method</methodName></methodCall>""",
@@ -44,10 +41,7 @@ def is_xmlrpc_active(target_url):
             timeout=10
         )
         
-        if "faultCode" in invalid_response.text:
-            return True
-            
-        return False
+        return "faultCode" in invalid_response.text
         
     except Exception:
         return False
@@ -58,33 +52,88 @@ def check_xmlrpc(url):
     print_status(f"Analizando: {target_url}", "info")
     
     try:
-        # Detección principal
         xmlrpc_detected = is_xmlrpc_active(target_url)
         
-        # Resultado de detección
         if xmlrpc_detected:
             print_status("XML-RPC detectado", "success", prefix="[DETECCIÓN]")
+            
+            # Listar todos los métodos
+            print_status("Listando métodos disponibles:", "info", prefix="\n[MÉTODOS XML-RPC]")
+            list_methods_payload = """<?xml version='1.0' encoding='utf-8'?>
+            <methodCall>
+                <methodName>system.listMethods</methodName>
+                <params></params>
+            </methodCall>"""
+            
+            response = requests.post(
+                target_url, 
+                data=list_methods_payload,
+                headers={'Content-Type': 'text/xml'},
+                timeout=15
+            )
+            
+            if response.status_code == 200:
+                try:
+                    root = ET.fromstring(response.text)
+                    methods = []
+                    namespace = {'ex': 'http://ws.apache.org/xmlrpc/namespaces/extensions'}
+                    
+                    for value in root.findall(".//ex:array/ex:data/ex:value/ex:string", namespace):
+                        methods.append(value.text.strip())
+                    
+                    if not methods:
+                        for value in root.findall(".//array/data/value/string"):
+                            methods.append(value.text.strip())
+                    
+                    if methods:
+                        for method in sorted(methods):
+                            print_status(f"{method}", "detected", prefix="•")
+                    else:
+                        print_status("No se encontraron métodos", "warning")
+                        
+                except ET.ParseError:
+                    print_status("Error parseando la respuesta XML", "error")
+                    
+            else:
+                print_status(f"Error HTTP {response.status_code}", "error")
+
+            # Análisis de métodos específicos
+            print_status("Analizando métodos críticos:", "info", prefix="\n[ANÁLISIS]")
+            critical_methods = {
+                "system.multicall": "Permite ejecución múltiple de métodos",
+                "pingback.ping": "Posible vector DDoS",
+                "wp.getUsersBlogs": "Puede usarse para fuerza bruta",
+                "metaWeblog.newPost": "Creación de posts remota"
+            }
+            
+            for method, desc in critical_methods.items():
+                if method in methods:
+                    # Probar si el método está realmente accesible
+                    test_payload = f"""<?xml version='1.0' encoding='utf-8'?>
+                    <methodCall>
+                        <methodName>{method}</methodName>
+                        <params></params>
+                    </methodCall>"""
+                    
+                    try:
+                        test_response = requests.post(
+                            target_url,
+                            data=test_payload,
+                            headers={'Content-Type': 'text/xml'},
+                            timeout=10
+                        )
+                        
+                        if test_response.status_code == 200 and "faultCode" not in test_response.text:
+                            print_status(f"{method}: {desc}", "warning", prefix=f"{Fore.RED}⚠️ ACCESIBLE")
+                        else:
+                            print_status(f"{method}: {desc}", "success", prefix=f"{Fore.YELLOW}🔒 RESTRINGIDO")
+                    except Exception:
+                        print_status(f"{method}: {desc}", "success", prefix=f"{Fore.YELLOW}🔒 RESTRINGIDO")
+                else:
+                    print_status(f"{method}: No disponible", "success", prefix=f"{Fore.GREEN}✓")
+            
         else:
             print_status("XML-RPC no detectado", "error", prefix="[DETECCIÓN]")
-            return  # Salir si no se detecta
-
-        # Análisis de métodos
-        print_status("Verificando métodos:", "info", prefix="\n[MÉTODOS]")
-        methods = {
-            "system.multicall": "Ejecución múltiple de métodos",
-            "pingback.ping": "Posible vector DDoS",
-            "wp.getUsersBlogs": "Fuerza bruta de credenciales",
-            "demo.sayHello": "Método de prueba"
-        }
-        
-        for method, desc in methods.items():
-            payload = f"""<?xml version='1.0'?><methodCall><methodName>{method}</methodName></methodCall>"""
-            response = requests.post(target_url, data=payload, headers={'Content-Type': 'text/xml'}, timeout=10)
             
-            if "faultCode" not in response.text and response.status_code == 200:
-                print_status(f"{method}: {desc}", "warning", prefix="•")
-            else:
-                print_status(f"{method}: Inaccesible", "success", prefix="•")
-                
     except Exception as e:
         print_status(f"Error: {str(e)}", "error")

@@ -94,3 +94,40 @@ def generate_wordlists(url=None):
                 print_status(f"{len(items)} {item_type} guardados en {Fore.YELLOW}{filename}", "success")
             except Exception as e:
                 print_status(f"Error guardando {item_type}: {str(e)}", "error")
+
+def generate_wordlists_gui(url=None):
+    print(BANNER)
+    print(f"{Fore.CYAN}► {Fore.WHITE}Selecciona qué listas generar:")
+    print(f"{Fore.CYAN} 1 {Fore.WHITE}Plugins")
+    print(f"{Fore.CYAN} 2 {Fore.WHITE}Temas")
+    print(f"{Fore.CYAN} 3 {Fore.WHITE}Ambos\n")
+    
+    choice = '3'
+    
+    targets = []
+    if choice == '1':
+        targets.append(('plugins', 'https://plugins.svn.wordpress.org/'))
+    elif choice == '2':
+        targets.append(('temas', 'https://themes.svn.wordpress.org/'))
+    elif choice == '3':
+        targets.extend([
+            ('plugins', 'https://plugins.svn.wordpress.org/'),
+            ('temas', 'https://themes.svn.wordpress.org/')
+        ])
+    else:
+        print_status("Opción inválida", "error")
+        return
+
+    log_dir = "wordlists"
+    os.makedirs(log_dir, exist_ok=True)
+
+    for item_type, url in targets:
+        items = fetch_items(url, item_type)
+        if items:
+            filename = os.path.join(log_dir, f"{item_type}.txt")
+            try:
+                with open(filename, 'w', encoding='utf-8') as f:
+                    f.write('\n'.join(items))
+                print_status(f"{len(items)} {item_type} guardados en {Fore.YELLOW}{filename}", "success")
+            except Exception as e:
+                print_status(f"Error guardando {item_type}: {str(e)}", "error")

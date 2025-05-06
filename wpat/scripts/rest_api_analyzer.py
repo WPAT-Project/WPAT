@@ -40,7 +40,8 @@ def check_rest_api(url):
         "/wp-json/wp/v2/search?search=hello",       # búsqueda en contenido público
         "/wp-json/wp/v2/block-types",               # lista de bloques disponibles
         "/wp-json/oembed/1.0",                      # raíz de oEmbed
-        "/wp-json/oembed/1.0/embed"                 # metadatos de oEmbed
+        "/wp-json/oembed/1.0/embed",                # metadatos de oEmbed
+        "/wp-json/wp/v2/users",                     # usuarios expuestos
     ]
     
     for endpoint in endpoints:

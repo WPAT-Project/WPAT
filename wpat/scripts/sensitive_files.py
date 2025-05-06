@@ -76,7 +76,7 @@ def scan_sensitive_files(url):
         "sample-config.php", "wp-config-sample.php",
         ".git/config", ".svn/entries", ".DS_Store", "Thumbs.db",
         "wp-cron.php", "wp-trackback.php", "wp-comments-post.php",
-        "error_log.1", "debug.log.1", "access_log", "access.log"
+        "error_log.1", "debug.log.1", "access_log", "access.log","wp-links-opml.php"
     ]
     
     print(f"{Fore.CYAN}[INFO] Escaneando {len(files)} archivos sensibles...")

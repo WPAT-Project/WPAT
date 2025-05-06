@@ -19,28 +19,34 @@ def detect_wp_version(url):
         {
             "type": "meta_tag",
             "url": normalized_url,
-            "pattern": r"WordPress\s+(\d+\.\d+\.\d+)",
+            "pattern": r"WordPress\s+(\d+\.\d+(?:\.\d+)?)",
             "field": "content"
         },
         {
             "type": "rss",
             "url": f"{normalized_url}/feed/",
-            "pattern": r"<generator>https://wordpress.org/\?v=(\d+\.\d+\.\d+)</generator>"
+            "pattern": r"<generator>https://wordpress\.org/\?v=(\d+\.\d+(?:\.\d+)?)</generator>"
         },
         {
             "type": "readme",
             "url": f"{normalized_url}/readme.html",
-            "pattern": r"Version (\d+\.\d+)"
+            "pattern": r"Version\s+(\d+\.\d+(?:\.\d+)?)"
         },
         {
             "type": "css",
             "url": f"{normalized_url}/wp-includes/css/dist/block-library/style.min.css",
-            "pattern": r"ver=(\d+\.\d+\.\d+)"
+            "pattern": r"ver=(\d+\.\d+(?:\.\d+)?)"
         },
         {
             "type": "js",
             "url": f"{normalized_url}/wp-includes/js/wp-embed.min.js",
-            "pattern": r"ver=(\d+\.\d+\.\d+)"
+            "pattern": r"ver=(\d+\.\d+(?:\.\d+)?)"
+        },
+        # Nueva fuente añadida
+        {
+            "type": "opml",
+            "url": f"{normalized_url}/wp-links-opml.php",
+            "pattern": r'generator="WordPress/(\d+\.\d+(?:\.\d+)?)"'
         }
     ]
 
