@@ -5,6 +5,7 @@ import sys
 import re
 import signal
 import datetime
+import argparse
 from colorama import Fore, Style, init
 from contextlib import redirect_stdout
 from wpat.scripts import (
@@ -17,7 +18,9 @@ from wpat.scripts import (
     generate_wordlists,
     scan_themes,
     brute_force,
-    check_ssl
+    check_ssl,
+    check_security_txt,
+    scan_cors,
 )
 
 init(autoreset=True)
@@ -38,6 +41,8 @@ TOOLS = {
     "7": {"name": "Escáner de Temas", "func": scan_themes, "full": False},    
     "8": {"name": "Fuerza Bruta en Login", "func": brute_force, "full": False},
     "9": {"name": "Verificar Certificado SSL", "func": check_ssl, "full": True},
+    "10": {"name": "Verificar Security.txt", "func": check_security_txt, "full": True},
+    "11": {"name": "Verificar CORS", "func": scan_cors, "full": False},
     "97": {"name": "Auditoría Completa", "func": None, "full": False},
     "98": {"name": "Actualizar Wordlists", "func": generate_wordlists, "full": False},
     "99": {"name": "Salir", "func": None, "full": False}
@@ -71,7 +76,7 @@ def print_banner():
  ╚══╝╚══╝ ╚═╝     ╚═╝  ╚═╝   ╚═╝   
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Fore.WHITE}       WordPress Professional Audit Tool
-{Fore.CYAN}          Versión 1.9 · Ethical Hacking
+{Fore.CYAN}          Versión 2.0 · Ethical Hacking
 {Fore.YELLOW}         Creado por Santitub | {Fore.BLUE}https://github.com/Santitub
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Style.RESET_ALL}"""
@@ -114,6 +119,15 @@ def run_tool(url, choice):
     print(f"\n{Style.BRIGHT}{Fore.GREEN}✓ {Fore.WHITE}Log guardado en: {Fore.YELLOW}{log_file}")
 
 def main():
+    parser = argparse.ArgumentParser(description='WordPress Professional Audit Tool')
+    parser.add_argument('--gui', action='store_true', help='Launch the GUI version')
+    args = parser.parse_args()
+
+    if args.gui:
+        from wpat import gui
+        gui.launch_gui()
+        return
+
     print_banner()
     url = get_target_url()
     
