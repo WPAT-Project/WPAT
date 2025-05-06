@@ -22,9 +22,6 @@ setup(
         'requests',
         'beautifulsoup4',
         'tqdm',
-        'pyqt5',
-        'PyQtWebEngine',
-        'urllib3'
     ],
     entry_points={
         'console_scripts': [
