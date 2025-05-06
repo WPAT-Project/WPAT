@@ -5,7 +5,9 @@
 ![Maintenance](https://img.shields.io/badge/Maintained-Yes-brightgreen.svg)
 ![Installation](https://img.shields.io/badge/Installation-pipx%20%7C%20git-blueviolet)
 
-Herramienta profesional de auditoría de seguridad para sitios WordPress (uso ético exclusivo)
+Herramienta profesional de auditoría de seguridad para sitios WordPress (uso ético exclusivo).
+
+🔗 Sitio web oficial: [https://wpat.netlify.app/](https://wpat.netlify.app/)
 
 ## 🚀 Características Principales
 
@@ -19,9 +21,12 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 🎨 Escáner de Temas (detección por estilo CSS)
   - 🔓 Fuerza Bruta Optimizada (Login WordPress)
   - 🔐 Auditoría SSL/TLS (Certificados y Cifrado)
-    
+  - 🗒️ **Detección de archivo `security.txt` (Nuevo)**
+  - 🌐 **Detector de configuración CORS (Nuevo)**
+
 - 🛠 **Funcionalidades Clave:**
   - 🎨 Interfaz intuitiva con sistema de colores y banners ASCII
+  - 🖥️ **Nueva GUI interactiva**
   - 📁 Generación automática de logs detallados con marca temporal
   - ⚡ Escaneo multi-hilos configurable (1-50 hilos)
   - 🔄 Menú interactivo con navegación simplificada
@@ -88,29 +93,43 @@ Este método permite ejecutar WPAT de forma aislada utilizando Docker 🐋, sin 
 - pipx (para instalación global)
 - Conexión a internet para descargas
 
-**Dependencias:**
-- `colorama` - Sistema de colores para consola
-- `requests` - Peticiones HTTP avanzadas
-- `beautifulsoup4` - Analizador HTML
-- `tqdm` - Barras de progreso interactivas
+Aquí tienes la sección **Dependencias** actualizada con la nueva lista que incluyes:
+
+---
+
+### 📚 Dependencias
+
+Estas son las bibliotecas necesarias para el correcto funcionamiento de WPAT:
+
+* `colorama` — Sistema de colores para consola
+* `requests` — Peticiones HTTP avanzadas
+* `beautifulsoup4` — Analizador HTML
+* `tqdm` — Barras de progreso interactivas
+* `pyqt5` — Soporte para la interfaz gráfica de usuario (GUI)
+* `PyQtWebEngine` — Motor de renderizado web embebido en la GUI
+* `urllib3` — Manejo avanzado de conexiones HTTP
 
 ## 🖥️ Uso
 
 ```bash
-# Para instalación con pipx:
+# Desde pipx
 wpat
 
-# Para instalación tradicional:
-python main.py
+# Desde Docker
+docker run -it --rm santitub/wpat
+
+# Desde GUI
+python main.py --gui
 ```
 
 **Flujo de trabajo:**
 1. Ingresa URL objetivo
-2. Selecciona módulos desde el menú interactivo
+2. Selecciona módulos desde el menú interactivo o GUI
 3. Analiza resultados en tiempo real con salida limpia
 4. Revisa logs detallados en `/logs`
 
-**Menú Principal:**
+### **Menú Principal:**
+
 ```
 [1] Detectar Enumeración de Usuarios      [97] Auditoría Completa
 [2] Analizar XML-RPC                      [98] Generar Wordlists
@@ -121,6 +140,8 @@ python main.py
 [7] Escáner de Temas 
 [8] Fuerza Bruta en Login
 [9] Verificar Certificado SSL
+[10] Verificar Security.txt
+[11] Verificar CORS
 ```
 
 ## 📂 Estructura del Proyecto
@@ -128,33 +149,37 @@ python main.py
 ```
 WPAT/
 ├── main.py             # Script principal
+├── gui.py              # Interfaz gráfica (nueva)
 ├── requirements.txt    # Dependencias
 ├── logs/               # Registros de auditorías
 ├── wordlists/          # Listas oficiales generadas
 └── scripts/            # Módulos de auditoría
     ├── __init__.py
     ├── ssl_checker.py
+    ├── cors_detector.py          # Nuevo
     ├── user_enumeration.py
     ├── xmlrpc_analyzer.py
     ├── sensitive_files.py
     ├── wp_version.py
     ├── rest_api_analyzer.py
+    ├── security_txt.py           # Nuevo
     ├── plugin_scanner.py
     ├── theme_scanner.py
     └── brute_force.py
 ```
+## 🆕 Novedades en v2.0
 
-## 🆕 Novedades en v1.9
-
-- 🖼️ **Mejoras en los banners de los módulos**
-
-- 🔐 **Optimización en la detección de archivos sensibles**  
-
-- 🔎 **Mejoras en la detección de la versión de WordPress**
+* 🗒️ **Nuevo módulo: `security_txt.py`** — Busca e interpreta archivos `security.txt`
+* 🌐 **Nuevo módulo: `cors_detector.py`** — Detecta configuraciones de CORS potencialmente inseguras
+* 🐋 **Imagen oficial Docker añadida** — Facilita la ejecución sin instalación local
+* 🖥️ **Nueva GUI** — Interfaz gráfica en fase experimental
+* 🌐 **Página web oficial** — Documentación y novedades centralizadas en [https://wpat.netlify.app/](https://wpat.netlify.app/)
+* 🧹 **Mejoras generales en todos los módulos existentes** — Detección más precisa, rendimiento mejorado
 
 ## 📜 Licencia y Ética
 
-Distribuido bajo licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
+Distribuido bajo licencia **GPL-3.0**.
+Ver [LICENSE](LICENSE) para más detalles.
 
 **⚠️ Nota de Uso Ético:**  
 Este software debe usarse únicamente en sistemas con permiso explícito del propietario. Incluye características avanzadas que podrían ser consideradas intrusivas si se usan sin autorización. El mal uso es responsabilidad exclusiva del usuario final.
