@@ -1,12 +1,19 @@
 from setuptools import setup, find_packages
 
+# Manejo seguro de README.md
+try:
+    with open("README.md", encoding="utf-8") as f:
+        long_description = f.read()
+except FileNotFoundError:
+    long_description = ""
+
 setup(
     name="wpat",
-    version="1.9",
+    version="2.0",
     author="Santitub",
     author_email="tu@email.com",
     description="WPAT (WP Audit Toolkit) es una herramienta de auditoría de seguridad para WordPress que detecta vulnerabilidades comunes y expone riesgos de manera eficiente.",
-    long_description=open('README.md', encoding='utf-8').read(),
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Santitub/WPAT",
     packages=find_packages(include=["wpat", "wpat.*"]),
@@ -14,7 +21,10 @@ setup(
         'colorama',
         'requests',
         'beautifulsoup4',
-        'tqdm'
+        'tqdm',
+        'pyqt5',
+        'PyQtWebEngine',
+        'urllib3'
     ],
     entry_points={
         'console_scripts': [

@@ -2,3 +2,6 @@ colorama
 requests
 beautifulsoup4
 tqdm
+pyqt5
+PyQtWebEngine
+urllib3
