@@ -21,10 +21,7 @@ setup(
         'colorama',
         'requests',
         'beautifulsoup4',
-        'tqdm',
-        'pyqt5',
-        'PyQtWebEngine',
-        'urllib3'
+        'tqdm'
     ],
     entry_points={
         'console_scripts': [
