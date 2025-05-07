@@ -124,8 +124,7 @@ def main():
     args = parser.parse_args()
 
     if args.gui:
-        from wpat import gui
-        gui.launch_gui()
+        os.system(f"{sys.executable} -m wpat.gui")
         return
 
     print_banner()
