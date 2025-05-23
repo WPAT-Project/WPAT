@@ -35,18 +35,41 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
 
 ## 📦 Instalación
 
+Claro, aquí tienes la sección actualizada del README con **ambas opciones para instalar con GUI** (usando `git+...#egg=wpat[gui]` o clonando el repositorio), y con las instrucciones claras para quienes no necesitan la GUI:
+
+---
+
 ### Método 1: Instalación con pipx (Recomendado)
+
 **Para una instalación global y aislada:**
+
 ```bash
 # Instalar pipx si no está disponible
 python -m pip install --user pipx
 python -m pipx ensurepath
 
-# Instalar WPAT
+# Instalar WPAT (modo CLI, sin GUI)
 pipx install git+https://github.com/Santitub/WPAT.git
 
 # Ejecutar (desde cualquier directorio)
 wpat
+```
+
+#### 🖥️ ¿Quieres usar la interfaz gráfica (GUI)?
+
+Si deseas habilitar funciones gráficas basadas en PyQt (como vistas web), instala WPAT con soporte GUI usando **una de estas dos opciones**:
+
+**Opción A** – Instalación directa desde GitHub con extras:
+
+```bash
+pipx install 'git+https://github.com/Santitub/WPAT.git#egg=wpat[gui]'
+```
+
+**Opción B** – Clonando el repositorio y luego instalando:
+
+```bash
+git clone https://github.com/Santitub/WPAT.git
+pipx install ./WPAT --pip-args='.[gui]'
 ```
 
 ### ⚙️ Método 2: Instalación tradicional *(modo desarrollo — actualmente no disponible)*
