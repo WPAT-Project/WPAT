@@ -1,6 +1,5 @@
 from setuptools import setup, find_packages
 
-# Manejo seguro de README.md
 try:
     with open("README.md", encoding="utf-8") as f:
         long_description = f.read()
@@ -22,10 +21,14 @@ setup(
         'requests',
         'beautifulsoup4',
         'tqdm',
-        'pyqt5',
-        'PyQtWebEngine',
         'urllib3'
     ],
+    extras_require={
+        'gui': [
+            'pyqt5',
+            'PyQtWebEngine'
+        ]
+    },
     entry_points={
         'console_scripts': [
             'wpat=wpat.main:main'
