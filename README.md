@@ -35,10 +35,6 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
 
 ## 📦 Instalación
 
-Claro, aquí tienes la sección actualizada del README con **ambas opciones para instalar con GUI** (usando `git+...#egg=wpat[gui]` o clonando el repositorio), y con las instrucciones claras para quienes no necesitan la GUI:
-
----
-
 ### Método 1: Instalación con pipx (Recomendado)
 
 **Para una instalación global y aislada:**
