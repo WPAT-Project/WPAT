@@ -33,88 +33,117 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 🚨 Sistema mejorado de manejo de errores y Ctrl+C
   - 📦 Generador de Wordlists Oficiales (Plugins/Temas)
 
+
 ## 📦 Instalación
 
-### Método 1: Instalación con pipx (Recomendado)
+### ✅ Método 1: Instalación con pip (modo tradicional)
 
-**Para una instalación global y aislada:**
+```bash
+# Instalar WPAT (solo consola, sin GUI)
+pip install wpat
+
+# Ejecutar WPAT en modo CLI
+wpat
+```
+
+#### 🖥️ ¿Quieres la versión con interfaz gráfica (GUI)?
+
+```bash
+# Instalar WPAT con soporte para GUI (PyQt5)
+pip install "wpat[gui]"
+
+# Ejecutar la GUI
+wpat-gui
+```
+
+---
+
+### ✅ Método 2: Instalación con pipx (Recomendado)
+
+> `pipx` permite una instalación global y aislada, ideal para herramientas CLI.
 
 ```bash
 # Instalar pipx si no está disponible
 python -m pip install --user pipx
 python -m pipx ensurepath
 
-# Instalar WPAT (modo CLI, sin GUI)
-pipx install git+https://github.com/Santitub/WPAT.git
+# Instalar WPAT (solo CLI)
+pipx install wpat
 
-# Ejecutar (desde cualquier directorio)
+# Ejecutar
 wpat
 ```
 
-#### 🖥️ ¿Quieres usar la interfaz gráfica (GUI)?
+#### 🖥️ Para instalar WPAT con GUI usando pipx:
 
-Si deseas habilitar funciones gráficas basadas en PyQt (como vistas web), instala WPAT con soporte GUI usando **una de estas dos opciones**:
+```bash
+# Versión GUI usando pipx (con dependencias gráficas)
+pipx install "wpat[gui]"
 
-**Opción A** – Instalación directa desde GitHub con extras:
+# Ejecutar GUI
+wpat --gui
+```
+
+---
+
+### 🛠️ Método 3: Instalación desde GitHub
+
+**Opción A – Solo CLI:**
+
+```bash
+pipx install git+https://github.com/Santitub/WPAT.git
+```
+
+**Opción B – Con soporte GUI:**
 
 ```bash
 pipx install 'git+https://github.com/Santitub/WPAT.git#egg=wpat[gui]'
 ```
 
-**Opción B** – Clonando el repositorio y luego instalando:
+---
+
+### ⚙️ Método 4: Instalación desde fuente (modo desarrollo)
+
+> Ideal para colaboradores o desarrolladores.
 
 ```bash
-git clone https://github.com/Santitub/WPAT.git
-pipx install ./WPAT --pip-args='.[gui]'
-```
-
-### ⚙️ Método 2: Instalación tradicional *(modo desarrollo — actualmente no disponible)*
-
-> ⚠️ **Nota:** Este método está pensado para entornos de desarrollo. Actualmente no se encuentra funcional.
-
-```bash
-# Clonar repositorio
 git clone https://github.com/Santitub/WPAT.git
 cd WPAT
-
-# Crear entorno virtual (opcional)
-python -m venv venv
-source venv/bin/activate  # Linux/MacOS
-# venv\Scripts\activate  # Windows
-
-# Instalar dependencias
-pip install -r requirements.txt
-
-# Ejecutar
-python main.py
+pip install ".[gui]"
 ```
 
-### Método 3: Instalación con Docker 🐳
+---
 
-**Para una instalación rápida utilizando Docker:**
+### 🐳 Método 5: Instalación con Docker
 
 ```bash
-# Instalar Docker (si no está instalado) 🔧
-sudo apt update
-sudo apt install docker.io
-
-# Descargar la imagen de WPAT 📥
+# Descargar la imagen oficial de WPAT
 sudo docker pull santitub/wpat
 
-# Ejecutar el contenedor de WPAT 🚀
+# Ejecutar WPAT en contenedor Docker
 sudo docker run -it --rm santitub/wpat
 ```
 
-Este método permite ejecutar WPAT de forma aislada utilizando Docker 🐋, sin necesidad de instalar dependencias en tu sistema local.
+---
 
-**Requisitos del sistema:**
-- Python 3.8+ con pip
-- pipx (para instalación global)
-- Conexión a internet para descargas
+### ▶️ Comandos de ejecución
 
-Aquí tienes la sección **Dependencias** actualizada con la nueva lista que incluyes:
+```bash
+# CLI (línea de comandos)
+wpat
+
+# GUI (interfaz gráfica)
+wpat-gui
+```
 
 ---
+
+### 📌 Requisitos del sistema
+
+* Python 3.8 o superior
+* pip / pipx
+* Acceso a internet para actualizaciones
+* Entorno de escritorio si vas a usar la GUI (PyQt5)
 
 ### 📚 Dependencias
 
@@ -131,8 +160,8 @@ Estas son las bibliotecas necesarias para el correcto funcionamiento de WPAT:
 ## 🖥️ Uso
 
 ```bash
-# Desde pipx
-wpat
+# Desde pip/pipx
+wpat / wpat --gui)
 
 # Desde Docker
 docker run -it --rm santitub/wpat
