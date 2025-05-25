@@ -124,20 +124,6 @@ sudo docker pull santitub/wpat
 sudo docker run -it --rm santitub/wpat
 ```
 
----
-
-### ▶️ Comandos de ejecución
-
-```bash
-# CLI (línea de comandos)
-wpat
-
-# GUI (interfaz gráfica)
-wpat-gui
-```
-
----
-
 ### 📌 Requisitos del sistema
 
 * Python 3.8 o superior
