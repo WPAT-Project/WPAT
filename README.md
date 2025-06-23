@@ -1,4 +1,4 @@
-# 🛡️ WP Audit Toolkit - Ethical WordPress Security Auditor
+# 🛡️ WordPress Professional Audit Tool - Ethical WordPress Security Auditor
 
 ![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)
