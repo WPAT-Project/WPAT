@@ -5,96 +5,97 @@
 ![Maintenance](https://img.shields.io/badge/Maintained-Yes-brightgreen.svg)
 ![Installation](https://img.shields.io/badge/Installation-pipx%20%7C%20git-blueviolet)
 
-Herramienta profesional de auditoría de seguridad para sitios WordPress (uso ético exclusivo).
+Professional security audit tool for WordPress sites (exclusive ethical use).
 
-🔗 Sitio web oficial: [https://wpat.netlify.app/](https://wpat.netlify.app/)
+🔗 Official website: [https://wpat.netlify.app/](https://wpat.netlify.app/)
 
-## 🚀 Características Principales
+## 🚀 Main Features
 
-- 🔍 **Módulos Especializados:**
-  - 🕵️ Detección de Enumeración de Usuarios
-  - 🛑 Análisis de Vulnerabilidades XML-RPC
-  - 📂 Escáner de Archivos Sensibles Expuestos
-  - 🔖 Fingerprinting de Versión de WordPress
-  - 📡 Auditoría de Endpoints REST API
-  - 🧩 Escáner de Plugins (detecta instalaciones activas)
-  - 🎨 Escáner de Temas (detección por estilo CSS)
-  - 🔓 Fuerza Bruta Optimizada (Login WordPress)
-  - 🔐 Auditoría SSL/TLS (Certificados y Cifrado)
-  - 🗒️ **Detección de archivo `security.txt` (Nuevo)**
-  - 🌐 **Detector de configuración CORS (Nuevo)**
+* 🔍 **Specialized Modules:**
 
-- 🛠 **Funcionalidades Clave:**
-  - 🎨 Interfaz intuitiva con sistema de colores y banners ASCII
-  - 🖥️ **Nueva GUI interactiva**
-  - 📁 Generación automática de logs detallados con marca temporal
-  - ⚡ Escaneo multi-hilos configurable (1-50 hilos)
-  - 🔄 Menú interactivo con navegación simplificada
-  - 🚨 Sistema mejorado de manejo de errores y Ctrl+C
-  - 📦 Generador de Wordlists Oficiales (Plugins/Temas)
+  * 🕵️ User Enumeration Detection
+  * 🛑 XML-RPC Vulnerability Analysis
+  * 📂 Exposed Sensitive Files Scanner
+  * 🔖 WordPress Version Fingerprinting
+  * 📡 REST API Endpoints Audit
+  * 🧩 Plugin Scanner (detects active installations)
+  * 🎨 Theme Scanner (detection by CSS style)
+  * 🔓 Optimized Brute Force (WordPress Login)
+  * 🔐 SSL/TLS Audit (Certificates and Encryption)
+  * 🗒️ **`security.txt` file detection (New)**
+  * 🌐 **CORS configuration detector (New)**
 
+* 🛠 **Key Features:**
 
-## 📦 Instalación
+  * 🎨 Intuitive interface with color scheme and ASCII banners
+  * 🖥️ **New interactive GUI**
+  * 📁 Automatic generation of detailed logs with timestamps
+  * ⚡ Configurable multi-threaded scanning (1-50 threads)
+  * 🔄 Interactive menu with simplified navigation
+  * 🚨 Enhanced error handling and Ctrl+C system
+  * 📦 Official Wordlist Generator (Plugins/Themes)
 
-### ✅ Método 1: Instalación con pip (modo tradicional)
+## 📦 Installation
+
+### ✅ Method 1: Installation via pip (traditional mode)
 
 ```bash
-# Instalar WPAT (solo consola, sin GUI)
+# Install WPAT (CLI only, no GUI)
 pip install wpat
 
-# Ejecutar WPAT en modo CLI
+# Run WPAT in CLI mode
 wpat
 ```
 
-#### 🖥️ ¿Quieres la versión con interfaz gráfica (GUI)?
+#### 🖥️ Want the version with GUI?
 
 ```bash
-# Instalar WPAT con soporte para GUI (PyQt5)
+# Install WPAT with GUI support (PyQt5)
 pip install "wpat[gui]"
 
-# Ejecutar la GUI
+# Run the GUI
 wpat-gui
 ```
 
 ---
 
-### ✅ Método 2: Instalación con pipx (Recomendado)
+### ✅ Method 2: Installation via pipx (Recommended)
 
-> `pipx` permite una instalación global y aislada, ideal para herramientas CLI.
+> `pipx` allows for global and isolated installation, ideal for CLI tools.
 
 ```bash
-# Instalar pipx si no está disponible
+# Install pipx if not available
 python -m pip install --user pipx
 python -m pipx ensurepath
 
-# Instalar WPAT (solo CLI)
+# Install WPAT (CLI only)
 pipx install wpat
 
-# Ejecutar
+# Run it
 wpat
 ```
 
-#### 🖥️ Para instalar WPAT con GUI usando pipx:
+#### 🖥️ To install WPAT with GUI using pipx:
 
 ```bash
-# Versión GUI usando pipx (con dependencias gráficas)
+# GUI version using pipx (with graphical dependencies)
 pipx install "wpat[gui]"
 
-# Ejecutar GUI
+# Run GUI
 wpat --gui
 ```
 
 ---
 
-### 🛠️ Método 3: Instalación desde GitHub
+### 🛠️ Method 3: Installation from GitHub
 
-**Opción A – Solo CLI:**
+**Option A – CLI only:**
 
 ```bash
 pipx install git+https://github.com/Santitub/WPAT.git
 ```
 
-**Opción B – Con soporte GUI:**
+**Option B – With GUI support:**
 
 ```bash
 pipx install 'git+https://github.com/Santitub/WPAT.git#egg=wpat[gui]'
@@ -102,9 +103,9 @@ pipx install 'git+https://github.com/Santitub/WPAT.git#egg=wpat[gui]'
 
 ---
 
-### ⚙️ Método 4: Instalación desde fuente (modo desarrollo)
+### ⚙️ Method 4: Installation from source (development mode)
 
-> Ideal para colaboradores o desarrolladores.
+> Ideal for contributors or developers.
 
 ```bash
 git clone https://github.com/Santitub/WPAT.git
@@ -114,106 +115,108 @@ pip install ".[gui]"
 
 ---
 
-### 🐳 Método 5: Instalación con Docker
+### 🐳 Method 5: Installation with Docker
 
 ```bash
-# Descargar la imagen oficial de WPAT
+# Download the official WPAT image
 sudo docker pull santitub/wpat
 
-# Ejecutar WPAT en contenedor Docker
+# Run WPAT in Docker container
 sudo docker run -it --rm santitub/wpat
 ```
 
-### 📌 Requisitos del sistema
+### 📌 System Requirements
 
-* Python 3.8 o superior
+* Python 3.8 or higher
 * pip / pipx
-* Acceso a internet para actualizaciones
-* Entorno de escritorio si vas a usar la GUI (PyQt5)
+* Internet access for updates
+* Desktop environment if using the GUI (PyQt5)
 
-### 📚 Dependencias
+### 📚 Dependencies
 
-Estas son las bibliotecas necesarias para el correcto funcionamiento de WPAT:
+These are the libraries required for WPAT to work properly:
 
-* `colorama` — Sistema de colores para consola
-* `requests` — Peticiones HTTP avanzadas
-* `beautifulsoup4` — Analizador HTML
-* `tqdm` — Barras de progreso interactivas
-* `pyqt5` — Soporte para la interfaz gráfica de usuario (GUI)
-* `PyQtWebEngine` — Motor de renderizado web embebido en la GUI
-* `urllib3` — Manejo avanzado de conexiones HTTP
+* `colorama` — Console color system
+* `requests` — Advanced HTTP requests
+* `beautifulsoup4` — HTML parser
+* `tqdm` — Interactive progress bars
+* `pyqt5` — GUI support
+* `PyQtWebEngine` — Web rendering engine embedded in the GUI
+* `urllib3` — Advanced HTTP connection handling
 
-## 🖥️ Uso
+## 🖥️ Usage
 
 ```bash
-# Desde pip/pipx
+# From pip/pipx
 wpat / wpat --gui)
 
-# Desde Docker
+# From Docker
 docker run -it --rm santitub/wpat
 
-# Desde GUI
+# From GUI
 python main.py --gui
 ```
 
-**Flujo de trabajo:**
-1. Ingresa URL objetivo
-2. Selecciona módulos desde el menú interactivo o GUI
-3. Analiza resultados en tiempo real con salida limpia
-4. Revisa logs detallados en `/logs`
+**Workflow:**
 
-### **Menú Principal:**
+1. Enter the target URL
+2. Select modules from the interactive menu or GUI
+3. Analyze real-time results with clean output
+4. Review detailed logs in `/logs`
+
+### **Main Menu:**
 
 ```
-[1] Detectar Enumeración de Usuarios      [97] Auditoría Completa
-[2] Analizar XML-RPC                      [98] Generar Wordlists
-[3] Escáner de Archivos Sensibles         [99] Salir
-[4] Detectar Versión de WordPress
-[5] Auditar REST API
-[6] Escáner de Plugins
-[7] Escáner de Temas 
-[8] Fuerza Bruta en Login
-[9] Verificar Certificado SSL
-[10] Verificar Security.txt
-[11] Verificar CORS
+[1] Detect User Enumeration        [97] Full Audit
+[2] Analyze XML-RPC               [98] Generate Wordlists
+[3] Sensitive Files Scanner       [99] Exit
+[4] Detect WordPress Version
+[5] Audit REST API
+[6] Plugin Scanner
+[7] Theme Scanner 
+[8] Brute Force on Login
+[9] Check SSL Certificate
+[10] Check Security.txt
+[11] Check CORS
 ```
 
-## 📂 Estructura del Proyecto
+## 📂 Project Structure
 
 ```
 WPAT/
-├── main.py             # Script principal
-├── gui.py              # Interfaz gráfica (nueva)
-├── requirements.txt    # Dependencias
-├── logs/               # Registros de auditorías
-├── wordlists/          # Listas oficiales generadas
-└── scripts/            # Módulos de auditoría
+├── main.py             # Main script
+├── gui.py              # Graphical Interface (new)
+├── requirements.txt    # Dependencies
+├── logs/               # Audit logs
+├── wordlists/          # Generated official wordlists
+└── scripts/            # Audit modules
     ├── __init__.py
     ├── ssl_checker.py
-    ├── cors_detector.py          # Nuevo
+    ├── cors_detector.py          # New
     ├── user_enumeration.py
     ├── xmlrpc_analyzer.py
     ├── sensitive_files.py
     ├── wp_version.py
     ├── rest_api_analyzer.py
-    ├── security_txt.py           # Nuevo
+    ├── security_txt.py           # New
     ├── plugin_scanner.py
     ├── theme_scanner.py
     └── brute_force.py
 ```
-## 🆕 Novedades en v2.0
 
-* 🗒️ **Nuevo módulo: `security_txt.py`** — Busca e interpreta archivos `security.txt`
-* 🌐 **Nuevo módulo: `cors_detector.py`** — Detecta configuraciones de CORS potencialmente inseguras
-* 🐋 **Imagen oficial Docker añadida** — Facilita la ejecución sin instalación local
-* 🖥️ **Nueva GUI** — Interfaz gráfica en fase experimental
-* 🌐 **Página web oficial** — Documentación y novedades centralizadas en [https://wpat.netlify.app/](https://wpat.netlify.app/)
-* 🧹 **Mejoras generales en todos los módulos existentes** — Detección más precisa, rendimiento mejorado
+## 🆕 What's New in v2.0
 
-## 📜 Licencia y Ética
+* 🗒️ **New module: `security_txt.py`** — Searches and interprets `security.txt` files
+* 🌐 **New module: `cors_detector.py`** — Detects potentially unsafe CORS configurations
+* 🐋 **Official Docker image added** — Simplifies execution without local installation
+* 🖥️ **New GUI** — Experimental graphical interface
+* 🌐 **Official website** — Documentation and updates centralized at [https://wpat.netlify.app/](https://wpat.netlify.app/)
+* 🧹 **General improvements across all modules** — More accurate detection, enhanced performance
 
-Distribuido bajo licencia **GPL-3.0**.
-Ver [LICENSE](LICENSE) para más detalles.
+## 📜 License and Ethics
 
-**⚠️ Nota de Uso Ético:**  
-Este software debe usarse únicamente en sistemas con permiso explícito del propietario. Incluye características avanzadas que podrían ser consideradas intrusivas si se usan sin autorización. El mal uso es responsabilidad exclusiva del usuario final.
+Distributed under the **GPL-3.0** license.
+See [LICENSE](LICENSE) for details.
+
+**⚠️ Ethical Use Note:**
+This software should only be used on systems with explicit permission from the owner. It includes advanced features that may be considered intrusive if used without authorization. Misuse is the sole responsibility of the end user.
