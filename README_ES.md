@@ -190,25 +190,22 @@ WPAT/
 └── scripts/            # Módulos de auditoría
     ├── __init__.py
     ├── ssl_checker.py
-    ├── cors_detector.py          # Nuevo
+    ├── cors_detector.py          
     ├── user_enumeration.py
     ├── xmlrpc_analyzer.py
     ├── sensitive_files.py
     ├── wp_version.py
     ├── rest_api_analyzer.py
-    ├── security_txt.py           # Nuevo
+    ├── security_txt.py           
     ├── plugin_scanner.py
     ├── theme_scanner.py
     └── brute_force.py
 ```
-## 🆕 Novedades en v2.0
 
-* 🗒️ **Nuevo módulo: `security_txt.py`** — Busca e interpreta archivos `security.txt`
-* 🌐 **Nuevo módulo: `cors_detector.py`** — Detecta configuraciones de CORS potencialmente inseguras
-* 🐋 **Imagen oficial Docker añadida** — Facilita la ejecución sin instalación local
-* 🖥️ **Nueva GUI** — Interfaz gráfica en fase experimental
-* 🌐 **Página web oficial** — Documentación y novedades centralizadas en [https://wpat.netlify.app/](https://wpat.netlify.app/)
-* 🧹 **Mejoras generales en todos los módulos existentes** — Detección más precisa, rendimiento mejorado
+## 🆕 Novedades en v2.0.1
+
+* 🔍 Mejoras en el módulo de detección `cors_detector.py`
+* ⚙️ Mejoras en el módulo `rest_api_analyzer.py`
 
 ## 📜 Licencia y Ética
 
