@@ -76,7 +76,7 @@ def print_banner():
  ╚══╝╚══╝ ╚═╝     ╚═╝  ╚═╝   ╚═╝   
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Fore.WHITE}       WordPress Professional Audit Tool
-{Fore.CYAN}          Versión 2.0 · Ethical Hacking
+{Fore.CYAN}          Versión 2.0.1 · Ethical Hacking
 {Fore.YELLOW}         Creado por Santitub | {Fore.BLUE}https://github.com/Santitub
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Style.RESET_ALL}"""
