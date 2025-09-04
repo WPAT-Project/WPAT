@@ -8,10 +8,10 @@ except FileNotFoundError:
 
 setup(
     name="wpat",
-    version="2.0",
+    version="2.0.1",
     author="Santitub",
     license="GPLv3",
-    author_email="tu@email.com",
+    author_email="santitub22@email.com",
     description="WPAT (WP Audit Toolkit) es una herramienta de auditoría de seguridad para WordPress que detecta vulnerabilidades comunes y expone riesgos de manera eficiente.",
     long_description=long_description,
     long_description_content_type="text/markdown",
