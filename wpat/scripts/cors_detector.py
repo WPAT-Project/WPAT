@@ -249,7 +249,7 @@ def print_method_table_row(row, first_row=False):
             f"{Fore.RED+'✓' if json_possible else Fore.GREEN+'✗'}")
     print(line)
 
-def scan_cors():
+def scan_cors(url):
     """Re-written scan routine with compact output."""
     try:
         print(BANNER)
