@@ -21,12 +21,13 @@ Herramienta profesional de auditoría de seguridad para sitios WordPress (uso é
   - 🎨 Escáner de Temas (detección por estilo CSS)
   - 🔓 Fuerza Bruta Optimizada (Login WordPress)
   - 🔐 Auditoría SSL/TLS (Certificados y Cifrado)
-  - 🗒️ **Detección de archivo `security.txt` (Nuevo)**
-  - 🌐 **Detector de configuración CORS (Nuevo)**
+  - 🗒️ Detección de archivo `security.txt`
+  - 🌐 Detector de configuración CORS
+  - 🧾 **Generador de Reportes HTML (Nuevo) **
 
 - 🛠 **Funcionalidades Clave:**
   - 🎨 Interfaz intuitiva con sistema de colores y banners ASCII
-  - 🖥️ **Nueva GUI interactiva**
+  - 🖥️ GUI interactiva
   - 📁 Generación automática de logs detallados con marca temporal
   - ⚡ Escaneo multi-hilos configurable (1-50 hilos)
   - 🔄 Menú interactivo con navegación simplificada
@@ -200,12 +201,14 @@ WPAT/
     ├── plugin_scanner.py
     ├── theme_scanner.py
     └── brute_force.py
+    └── html_report.py           # Nuevo
 ```
 
-## 🆕 Novedades en v2.0.1
+## 🆕 Novedades en v2.1
 
-* 🔍 Mejoras en el módulo de detección `cors_detector.py`
-* ⚙️ Mejoras en el módulo `rest_api_analyzer.py`
+* 🧾 Nuevo módulo de reportes en **HTML**
+* ⚙️ Mejoras en las peticiones de los módulos
+
 
 ## 📜 Licencia y Ética
 
