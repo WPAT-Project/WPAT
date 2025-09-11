@@ -5,3 +5,4 @@ tqdm
 pyqt5
 PyQtWebEngine
 urllib3
+jinja2
