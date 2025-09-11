@@ -22,7 +22,8 @@ setup(
         'requests',
         'beautifulsoup4',
         'tqdm',
-        'urllib3'
+        'urllib3',
+        'jinja2'
     ],
     extras_require={
         'gui': [
