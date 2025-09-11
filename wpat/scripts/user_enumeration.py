@@ -38,7 +38,7 @@ def check_author_archives(url, max_id=100, timeout=5, max_workers=20):
                 f"{url}?author={user_id}",
                 allow_redirects=True,
                 timeout=timeout,
-                headers={'User-Agent': 'WP Audit Tool'}
+                headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.188 Safari/537.36'}
             )
             
             if response.history and "author" in response.url:
@@ -68,7 +68,7 @@ def check_rest_api(url, timeout=5):
         response = requests.get(
             api_url,
             timeout=timeout,
-            headers={'User-Agent': 'WP Audit Tool'}
+            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.188 Safari/537.36'}
         )
         
         if response.status_code == 200:
@@ -94,7 +94,7 @@ def check_oembed(url, timeout=5):
         response = requests.get(
             oembed_url,
             timeout=timeout,
-            headers={'User-Agent': 'WP Audit Tool'}
+            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.188 Safari/537.36'}
         )
         
         if response.status_code == 200:

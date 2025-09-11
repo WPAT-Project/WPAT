@@ -112,7 +112,7 @@ def check_subdomain_vulnerability(url, verify_ssl=False, timeout=10):
             
             headers = {
                 'Origin': test_origin,
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.188 Safari/537.36'
             }
             
             response = session.get(url, headers=headers, timeout=timeout)
@@ -255,7 +255,7 @@ def scan_cors(url):
         print(BANNER)
 
         # ------------- USER INPUT -------------
-        url = input(f"{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}URL objetivo: ").strip()
+        print(f"{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}URL objetivo: {url}")
         if not url:
             print_status("Debe proporcionar una URL", "error")
             return

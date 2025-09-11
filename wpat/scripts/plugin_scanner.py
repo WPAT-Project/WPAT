@@ -51,7 +51,7 @@ def check_plugin(target_url, plugin, timeout=15):
     if shutdown:
         return ("cancelled", None)
     
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.188 Safari/537.36'}
     url = f"{target_url.rstrip('/')}/wp-content/plugins/{plugin}/"
     
     try:

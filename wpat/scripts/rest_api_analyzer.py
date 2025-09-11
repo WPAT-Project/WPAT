@@ -102,7 +102,7 @@ def check_rest_api(url):
             response = requests.get(
                 full_url,
                 timeout=10,
-                headers={'User-Agent': 'WP Audit Tool'},
+                headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.188 Safari/537.36'},
                 allow_redirects=False
             )
             

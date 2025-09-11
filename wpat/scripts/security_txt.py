@@ -51,7 +51,7 @@ def check_security_txt(url):
     print(f"{Fore.CYAN}{target_url}\n{'-'*45}")
     
     try:
-        response = requests.get(target_url, timeout=10, headers={'User-Agent': 'SecurityTxtInspector/3.0'})
+        response = requests.get(target_url, timeout=10, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.188 Safari/537.36'})
         response.raise_for_status()
         
         # Resultado exitoso

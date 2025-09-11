@@ -10,3 +10,4 @@ from .login import brute_force
 from .ssl_checker import check_ssl
 from .security_txt import check_security_txt
 from .cors_detector import scan_cors
+from .html_report import generate_report
