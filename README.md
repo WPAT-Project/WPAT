@@ -209,7 +209,6 @@ WPAT/
 ## 🆕 What's New in v2.1
 
 * 🧾 New HTML report module
-
 * ⚙️ Improved module request handling
 
 ## 📜 License and Ethics
