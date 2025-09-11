@@ -6,6 +6,9 @@ import re
 import signal
 import datetime
 import argparse
+import requests
+from urllib.parse import urlparse
+from time import sleep
 from colorama import Fore, Style, init
 from contextlib import redirect_stdout
 from wpat.scripts import (
@@ -21,6 +24,7 @@ from wpat.scripts import (
     check_ssl,
     check_security_txt,
     scan_cors,
+    generate_report,
 )
 
 init(autoreset=True)
@@ -42,7 +46,7 @@ TOOLS = {
     "8": {"name": "Fuerza Bruta en Login", "func": brute_force, "full": False},
     "9": {"name": "Verificar Certificado SSL", "func": check_ssl, "full": True},
     "10": {"name": "Verificar Security.txt", "func": check_security_txt, "full": True},
-    "11": {"name": "Verificar CORS", "func": scan_cors, "full": False},
+    "11": {"name": "Verificar CORS", "func": scan_cors, "full": True},
     "97": {"name": "Auditoría Completa", "func": None, "full": False},
     "98": {"name": "Actualizar Wordlists", "func": generate_wordlists, "full": False},
     "99": {"name": "Salir", "func": None, "full": False}
@@ -76,15 +80,41 @@ def print_banner():
  ╚══╝╚══╝ ╚═╝     ╚═╝  ╚═╝   ╚═╝   
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Fore.WHITE}       WordPress Professional Audit Tool
-{Fore.CYAN}          Versión 2.0.1 · Ethical Hacking
+{Fore.CYAN}          Versión 2.1 · Ethical Hacking
 {Fore.YELLOW}         Creado por Santitub | {Fore.BLUE}https://github.com/Santitub
 {Fore.MAGENTA}─────────────────────────────────────────────
 {Style.RESET_ALL}"""
     print(banner)
 
+def check_url(url):
+    parsed = urlparse(url)
+    if not all([parsed.scheme, parsed.netloc]):
+        print(f"\n{Fore.RED}[!] URL no válida: {url}")
+        sleep(1)
+        return False
+
+    try:
+        response = requests.head(url, timeout=5, allow_redirects=True)
+        if response.status_code >= 400:
+            print(f"\n{Fore.RED}[!] La URL respondió con un error HTTP: {response.status_code}")
+            sleep(1)
+            return False
+    except requests.RequestException as e:
+        print(f"\n{Fore.RED}[!] Error de conexión con la URL: {e}")
+        sleep(3)
+        return False
+
+    return True
+
 def get_target_url():
-    print(f"{Style.BRIGHT}{Fore.MAGENTA}►► {Fore.CYAN}PASO 1/3: {Fore.WHITE}CONFIGURACIÓN INICIAL")
-    return input(f"\n{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}URL objetivo {Fore.YELLOW}(ej: https://ejemplo.com){Fore.WHITE}: ").strip().rstrip('/')
+    while True:
+        clear_console()
+        print_banner()
+        print(f"{Style.BRIGHT}{Fore.MAGENTA}►► {Fore.CYAN}PASO 1/3: {Fore.WHITE}CONFIGURACIÓN INICIAL")
+        url = input(f"\n{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}URL objetivo {Fore.YELLOW}(ej: https://ejemplo.com){Fore.WHITE}: ").strip().rstrip('/')
+        
+        if check_url(url):
+            return url
 
 def print_menu(url):
     clear_console()
@@ -103,6 +133,7 @@ def run_tool(url, choice):
     os.makedirs(log_dir, exist_ok=True)
     timestamp = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
     log_file = os.path.join(log_dir, f"auditoria_{timestamp}.txt")
+    html_file = os.path.splitext(log_file)[0] + ".html"
 
     with open(log_file, 'w', encoding="utf-8") as f:
         dual = DualOutput(sys.stdout, f)
@@ -113,6 +144,9 @@ def run_tool(url, choice):
                     print(f"{Fore.MAGENTA}════════════ {TOOLS[key]['name'].upper()} {Fore.MAGENTA}════════════")
                     TOOLS[key]['func'](url)
                     print()
+                # Llamar al método generate_report al final
+                generate_report(log_file)
+                print(f"\n{Style.BRIGHT}{Fore.GREEN}✓ {Fore.WHITE}Log HTML guardado en: {Fore.YELLOW}{html_file}")
             else:
                 TOOLS[choice]['func'](url)
 
@@ -149,8 +183,10 @@ def main():
                 input(f"\n{Style.BRIGHT}{Fore.CYAN}↳ {Fore.WHITE}Presiona Enter para continuar...")
             else:
                 print(f"\n{Fore.RED}⚠ Opción sin funcionalidad asignada{Style.RESET_ALL}")
+                sleep(1)
         else:
             print(f"\n{Fore.RED}⚠ Opción inválida{Style.RESET_ALL}")
+            sleep(1)
 
 if __name__ == "__main__":
     main()
