@@ -22,13 +22,14 @@ Professional security audit tool for WordPress sites (exclusive ethical use).
   * 🎨 Theme Scanner (detection by CSS style)
   * 🔓 Optimized Brute Force (WordPress Login)
   * 🔐 SSL/TLS Audit (Certificates and Encryption)
-  * 🗒️ **`security.txt` file detection (New)**
-  * 🌐 **CORS configuration detector (New)**
+  * 🗒️ `security.txt` file detection
+  * 🌐 CORS configuration detector
+  * 🧾 **HTML Report Generator (New)**
 
 * 🛠 **Key Features:**
 
   * 🎨 Intuitive interface with color scheme and ASCII banners
-  * 🖥️ **New interactive GUI**
+  * 🖥️ New interactive GUI
   * 📁 Automatic generation of detailed logs with timestamps
   * ⚡ Configurable multi-threaded scanning (1-50 threads)
   * 🔄 Interactive menu with simplified navigation
@@ -148,7 +149,7 @@ These are the libraries required for WPAT to work properly:
 
 ```bash
 # From pip/pipx
-wpat / wpat --gui)
+wpat / wpat --gui
 
 # From Docker
 docker run -it --rm santitub/wpat
@@ -167,7 +168,7 @@ python main.py --gui
 ### **Main Menu:**
 
 ```
-[1] Detect User Enumeration        [97] Full Audit
+[1] Detect User Enumeration       [97] Full Audit
 [2] Analyze XML-RPC               [98] Generate Wordlists
 [3] Sensitive Files Scanner       [99] Exit
 [4] Detect WordPress Version
@@ -202,12 +203,14 @@ WPAT/
     ├── plugin_scanner.py
     ├── theme_scanner.py
     └── brute_force.py
+    └── html_report.py           # New
 ```
 
-## 🆕 What's New in v2.0.1
+## 🆕 What's New in v2.1
 
-* 🔍 Improvements to the detection module `cors_detector.py`
-* ⚙️ Improvements in the `rest_api_analyzer.py` module
+* 🧾 New HTML report module
+
+* ⚙️ Improved module request handling
 
 ## 📜 License and Ethics
 
